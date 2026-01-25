@@ -75,6 +75,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ### Database
 - MongoDB Atlas
+- Mongoose ODM
 - Indexed collections for performance
 
 ### Payments & Services ( Optional )
