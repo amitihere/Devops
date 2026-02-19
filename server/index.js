@@ -10,9 +10,7 @@ app.use(express.json());
 
 const userDetails = require("./routes/catalog")
 app.use('/api/info', userDetails)
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
