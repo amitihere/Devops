@@ -1,0 +1,65 @@
+.category-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--light-gray);
+    padding: 12px 0;
+    position: sticky;
+    top: 64px;
+    z-index: 90;
+}
+
+.category-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0 24px;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.category-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    background: var(--off-white);
+    border: 1.5px solid var(--mid-gray);
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.category-chip:hover {
+    background: var(--light-gray);
+    border-color: var(--accent);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.category-chip.active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.2);
+}
+
+.category-chip.active:hover {
+    background: var(--accent-hover);
+}
+
+.cat-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.cat-label {
+    line-height: 1;
+}
