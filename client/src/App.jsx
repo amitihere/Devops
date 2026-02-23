@@ -1,16 +1,24 @@
-import { useState,useEffect } from 'react'
-import { Link } from '@react-navigation/native';
-import './App.css'
+import { useState } from 'react';
+import './index.css';
+import Navbar from './components/Navbar/Navbar';
+import CategoryScroll from './components/CategoryScroll/CategoryScroll';
+import HomePage from './pages/HomePage';
 
 function App() {
+  const [activeCategory, setActiveCategory] = useState(null);
+
   return (
     <>
-      <div>
-        <h1>This is my project</h1>
-        <Link></Link>
-      </div>
+      <Navbar />
+      <CategoryScroll
+        activeCategory={activeCategory}
+        setActiveCategory={(cat) =>
+          setActiveCategory(prev => prev === cat ? null : cat)
+        }
+      />
+      <HomePage activeCategory={activeCategory} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
