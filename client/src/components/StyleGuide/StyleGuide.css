@@ -1,0 +1,446 @@
+/* ── Gen Z Section ── */
+.genz-section {
+    padding: 64px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.genz-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.genz-eyebrow-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.genz-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #1a1a1a;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.genz-fire-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #c0392b;
+    background: #fdf0ef;
+    border: 1px solid #f5c6c2;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.genz-title {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+.genz-subtitle {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+    max-width: 440px;
+    line-height: 1.6;
+}
+
+.genz-view-all {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+    flex-shrink: 0;
+}
+
+.genz-view-all:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+/* Filter Pills */
+.genz-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+
+.genz-filter-pill {
+    padding: 8px 20px;
+    border-radius: 100px;
+    background: #f5f4f2;
+    border: 1.5px solid #e2e0db;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.15s;
+}
+
+.genz-filter-pill:hover {
+    background: #eae8e3;
+    color: #1a1a1a;
+    transform: translateY(-1px);
+}
+
+.genz-filter-pill.active {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #fff;
+}
+
+/* Product Grid */
+.genz-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 52px;
+}
+
+@media (max-width: 960px) {
+    .genz-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 580px) {
+    .genz-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .genz-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Card */
+.genz-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #ebe9e4;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.25s, transform 0.25s;
+    display: flex;
+    flex-direction: column;
+}
+
+.genz-card:hover {
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.13);
+    transform: translateY(-5px);
+}
+
+/* Image */
+.genz-image-wrap {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+}
+
+.genz-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.genz-card:hover .genz-image {
+    transform: scale(1.06);
+}
+
+.genz-label-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+.genz-overlay-actions {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.genz-card:hover .genz-overlay-actions {
+    opacity: 1;
+}
+
+.genz-wishlist {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: background 0.2s, transform 0.15s;
+    color: #1a1a1a;
+}
+
+.genz-wishlist:hover {
+    background: #1a1a1a;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Card body */
+.genz-card-body {
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
+
+.genz-tags-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.genz-tag {
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+    background: #f2f0ec;
+    border: 1px solid #dedad3;
+    padding: 3px 9px;
+    border-radius: 20px;
+}
+
+.genz-card-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.genz-vibe {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Sizes */
+.genz-sizes-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.genz-size {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #f5f4f2;
+    border: 1px solid #e2e0db;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.genz-size:hover {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #1a1a1a;
+}
+
+/* Footer */
+.genz-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+.genz-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.genz-price {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: #1a1a1a;
+}
+
+.genz-original {
+    font-size: 0.82rem;
+    color: #aaa;
+    text-decoration: line-through;
+}
+
+.genz-off {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #c0392b;
+    background: #fdf0ef;
+    padding: 2px 7px;
+    border-radius: 20px;
+}
+
+.genz-add-btn {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.genz-add-btn:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+/* Bottom Banner */
+.genz-banner {
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 50%, #2a2a2a 100%);
+    border-radius: 22px;
+    padding: 44px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.genz-banner::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.genz-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 40%;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.genz-banner-text {
+    flex: 1;
+    min-width: 220px;
+    position: relative;
+    z-index: 1;
+}
+
+.genz-banner-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    background: #fff;
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+}
+
+.genz-banner-heading {
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: #fff;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+}
+
+.genz-banner-sub {
+    font-size: 0.88rem;
+    color: #999;
+    margin: 0;
+    line-height: 1.6;
+    max-width: 380px;
+}
+
+.genz-banner-cta {
+    background: #fff;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 30px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.genz-banner-cta:hover {
+    background: #f0ede8;
+    transform: translateY(-2px);
+}
