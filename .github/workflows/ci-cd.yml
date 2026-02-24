@@ -2,8 +2,6 @@ name: Project CI/CD Pipeline
 on:
   push:
     branches: [main]
-  pull_requests:
-    branches: [main]
 
 jobs:
   build:
