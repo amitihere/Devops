@@ -2,6 +2,7 @@ name: Project CI/CD Pipeline
 on:
   push:
     branches: [main]
+  #worflow_dispatch - custom triggers we can create
 
 jobs:
   build:
