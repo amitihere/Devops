@@ -5,5 +5,8 @@ const {signupController,loginController} = require("../controllers/userControlle
 
 router.post("/auth/signup", signupMiddle, signupController);
 router.post("/auth/login", loginMiddle, loginController);
+router.get("/catalog", (req, res) => {
+    res.json({message: "Welcome to the catalog!"})
+})
 
 module.exports = router
