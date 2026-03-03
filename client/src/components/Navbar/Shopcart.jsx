@@ -5,7 +5,7 @@ export default function Shopcart() {
   return (
     <div className="shopcart">
       <h2>Shopcart</h2>
-      <p>Your shopping cart is currently empty.</p>
+      <p>Your shopping cart is currently empty</p>
     </div>
   );
 }
