@@ -1,8 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 export default function Navbar() {
     const [searchQuery, setSearchQuery] = useState('');
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const stored = localStorage.getItem('thriftvault_user');
+        if (stored) {
+            try {
+                setUser(JSON.parse(stored));
+            } catch {
+                setUser(null);
+            }
+        }
+
+        // listen for storage changes (e.g. login in same tab via navigate)
+        const onStorage = () => {
+            const u = localStorage.getItem('thriftvault_user');
+            setUser(u ? JSON.parse(u) : null);
+        };
+        window.addEventListener('storage', onStorage);
+        // also listen for a custom event fired after login/signup
+        window.addEventListener('thriftvault:auth', onStorage);
+        return () => {
+            window.removeEventListener('storage', onStorage);
+            window.removeEventListener('thriftvault:auth', onStorage);
+        };
+    }, []);
+
+    const handleProfileClick = () => {
+        if (!user) {
+            navigate('/login');
+        }
+        // if logged in, clicking profile does nothing for now
+    };
 
     return (
         <nav className="navbar">
@@ -49,11 +83,24 @@ export default function Navbar() {
                         <span className="cart-badge">3</span>
                     </button>
 
-                    <button className="nav-btn profile-btn" title="Profile">
+                    {/* Profile button — changes based on auth state */}
+                    <button
+                        className={`nav-btn profile-btn ${user ? 'profile-btn--active' : ''}`}
+                        title={user ? `Logged in as ${user.username || user.email}` : 'Login'}
+                        onClick={handleProfileClick}
+                    >
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                             <circle cx="12" cy="7" r="4" />
                         </svg>
+
+                        {user && (
+                            <span className="profile-badge" title="Logged in">
+                                <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="2,5 4.5,7.5 8,3" />
+                                </svg>
+                            </span>
+                        )}
                     </button>
                 </div>
             </div>
