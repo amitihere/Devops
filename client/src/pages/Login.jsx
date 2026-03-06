@@ -55,6 +55,7 @@ export default function Login() {
                     </span>
                     <span className="auth-logo-name">ThriftVault</span>
                 </Link>
+                <button onClick={()=> navigate.goBack()}>Back</button>
 
                 <h1 className="auth-title">Welcome back</h1>
                 <p className="auth-subtitle">Log in to your ThriftVault account.</p>
