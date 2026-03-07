@@ -6,6 +6,7 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function Login() {
     const navigate = useNavigate();
+
     const [form, setForm] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -55,7 +56,7 @@ export default function Login() {
                     </span>
                     <span className="auth-logo-name">ThriftVault</span>
                 </Link>
-                <button onClick={()=> navigate.goBack()}>Back</button>
+                <button onClick={()=> navigation.navigate('/')}>Back</button>
 
                 <h1 className="auth-title">Welcome back</h1>
                 <p className="auth-subtitle">Log in to your ThriftVault account.</p>
