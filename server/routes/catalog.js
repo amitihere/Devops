@@ -8,14 +8,8 @@ router.post("/auth/login", loginMiddle, loginController);
 router.get("/catalog", (req, res) => {
     res.json({message: "Welcome to the catalog!"})
 })
-router.get("/catalog/items", (req, res) => {
-    const items = [
-        { id: 1, name: "Item 1", price: 10 },
-        { id: 2, name: "Item 2", price: 20 },
-        { id: 3, name: "Item 3", price: 30 },
-    ]
-    res.json(items)
-})
+router.post("/shop/items/cart")  // this route for items in the cart, this must be remove after 3 days and not more than 5 can be added.
+router.get("shop/availableItems/cart")
 
 
 module.exports = router
