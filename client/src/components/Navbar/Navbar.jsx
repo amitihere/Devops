@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiTag, FiSearch, FiHeart, FiShoppingBag, FiUser, FiSettings, FiCheck } from 'react-icons/fi';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -34,8 +35,9 @@ export default function Navbar() {
     const handleProfileClick = () => {
         if (!user) {
             navigate('/login');
+        } else {
+            navigate('/settings');
         }
-        // if logged in, clicking profile does nothing for now
     };
 
     return (
@@ -43,20 +45,14 @@ export default function Navbar() {
             <div className="navbar-inner">
                 <a href="/" className="navbar-brand">
                     <span className="brand-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-                            <line x1="7" y1="7" x2="7.01" y2="7" />
-                        </svg>
+                        <FiTag size={20} />
                     </span>
                     <span className="brand-name">ThriftVault</span>
                 </a>
 
                 <div className="navbar-search">
                     <span className="search-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="11" cy="11" r="8" />
-                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                        </svg>
+                        <FiSearch size={18} />
                     </span>
                     <input
                         type="text"
@@ -69,18 +65,17 @@ export default function Navbar() {
 
                 <div className="navbar-actions">
                     <button className="nav-btn" title="Wishlist">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                        </svg>
+                        <FiHeart size={22} />
                     </button>
 
                     <button className="nav-btn cart-btn" title="Cart" onClick={() => navigate('/cart')}>
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                            <line x1="3" y1="6" x2="21" y2="6" />
-                            <path d="M16 10a4 4 0 0 1-8 0" />
-                        </svg>
+                        <FiShoppingBag size={22} />
                         <span className="cart-badge">3</span>
+                    </button>
+
+                    {/* Settings button */}
+                    <button className="nav-btn" title="Settings" onClick={() => navigate('/settings')}>
+                        <FiSettings size={22} />
                     </button>
 
                     {/* Profile button — changes based on auth state */}
@@ -89,16 +84,11 @@ export default function Navbar() {
                         title={user ? `Logged in as ${user.username || user.email}` : 'Login'}
                         onClick={handleProfileClick}
                     >
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
-                        </svg>
+                        <FiUser size={22} />
 
                         {user && (
                             <span className="profile-badge" title="Logged in">
-                                <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="2,5 4.5,7.5 8,3" />
-                                </svg>
+                                <FiCheck size={8} color="#fff" />
                             </span>
                         )}
                     </button>
