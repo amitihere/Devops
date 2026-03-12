@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiTag } from 'react-icons/fi';
 import './Auth.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
@@ -49,10 +50,7 @@ export default function Login() {
             <div className="auth-card">
                 <Link to="/" className="auth-logo">
                     <span className="auth-logo-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
-                            <line x1="7" y1="7" x2="7.01" y2="7" />
-                        </svg>
+                        <FiTag size={20} />
                     </span>
                     <span className="auth-logo-name">ThriftVault</span>
                 </Link>

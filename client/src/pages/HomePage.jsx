@@ -1,3 +1,4 @@
+import { FiTruck, FiRotateCcw, FiCheckCircle, FiFeather } from 'react-icons/fi';
 import './HomePage.css';
 import Footer from "../components/Footer/Footer"
 import StyleGuide from '../components/StyleGuide/StyleGuide';
@@ -38,17 +39,10 @@ const trendingCollections = [
 ];
 
 const perks = [
-    { icon: null, title: 'Free Shipping', desc: 'On orders over ₹2,999' },
-    { icon: null, title: 'Easy Returns', desc: '30-day hassle-free' },
-    { icon: null, title: 'Quality Checked', desc: 'Every item inspected' },
-    { icon: null, title: 'Eco Friendly', desc: 'Sustainable fashion' },
-];
-
-const perkIcons = [
-    <svg key="ship" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>,
-    <svg key="return" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10" /><path d="M3.51 15a9 9 0 1 0 .49-4.95" /></svg>,
-    <svg key="check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>,
-    <svg key="leaf" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg>,
+    { icon: FiTruck,       title: 'Free Shipping',  desc: 'On orders over ₹2,999' },
+    { icon: FiRotateCcw,   title: 'Easy Returns',   desc: '30-day hassle-free' },
+    { icon: FiCheckCircle, title: 'Quality Checked', desc: 'Every item inspected' },
+    { icon: FiFeather,     title: 'Eco Friendly',   desc: 'Sustainable fashion' },
 ];
 
 export default function HomePage() {
@@ -73,9 +67,9 @@ export default function HomePage() {
 
             {/* Perks Strip */}
             <section className="perks-strip">
-                {perks.map((p, idx) => (
+                {perks.map((p) => (
                     <div key={p.title} className="perk">
-                        <span className="perk-icon">{perkIcons[idx]}</span>
+                        <span className="perk-icon"><p.icon size={20} /></span>
                         <div>
                             <span className="perk-title">{p.title}</span>
                             <span className="perk-desc">{p.desc}</span>

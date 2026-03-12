@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiChevronLeft, FiFilePlus, FiShoppingBag } from 'react-icons/fi';
 import './SellerDashboard.css';
 
 const SELLER = {
@@ -23,9 +24,7 @@ export default function SellerDashboard() {
             {/* Header */}
             <header className="sd-header">
                 <button className="sd-back" onClick={() => navigate('/')}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="15 18 9 12 15 6" />
-                    </svg>
+                    <FiChevronLeft size={16} />
                     Back to Store
                 </button>
                 <div className="sd-header-title">
@@ -43,12 +42,7 @@ export default function SellerDashboard() {
                 <section className="sd-stats">
                     <div className="sd-stat-card">
                         <div className="sd-stat-icon sd-stat-icon--purple">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                <polyline points="14 2 14 8 20 8" />
-                                <line x1="12" y1="18" x2="12" y2="12" />
-                                <line x1="9" y1="15" x2="15" y2="15" />
-                            </svg>
+                            <FiFilePlus size={22} />
                         </div>
                         <div className="sd-stat-number">{totalPublished}</div>
                         <div className="sd-stat-label">Total Published</div>
@@ -56,11 +50,7 @@ export default function SellerDashboard() {
 
                     <div className="sd-stat-card">
                         <div className="sd-stat-icon sd-stat-icon--green">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                                <line x1="3" y1="6" x2="21" y2="6" />
-                                <path d="M16 10a4 4 0 0 1-8 0" />
-                            </svg>
+                            <FiShoppingBag size={22} />
                         </div>
                         <div className="sd-stat-number">{totalSold}</div>
                         <div className="sd-stat-label">Items Sold</div>
