@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Shopcart from './components/Shoppingcart/Shopcart'
 import SellerDashboard from './pages/SellerDashboard'
+import Settings from './pages/Settings'
 
 function HomeLayout() {
   const [activeCategory, setActiveCategory] = useState(null)
@@ -38,6 +39,7 @@ function App() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/cart" element={<Shopcart />} />
       <Route path="/seller" element={<SellerDashboard />} />
+      <Route path="/settings" element={<Settings />} />
     </Routes>
   )
 }
