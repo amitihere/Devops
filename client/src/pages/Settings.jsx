@@ -8,7 +8,6 @@ import {
 } from 'react-icons/fi';
 import './Settings.css';
 
-/* ── Section data ───────────────────────────────────────────── */
 const sections = [
     {
         title: 'Account',
@@ -47,7 +46,6 @@ const dangerItems = [
     { id: 'delete', icon: FiTrash2,  color: 'red', label: 'Delete Account', desc: 'Permanently remove your account & data', danger: true },
 ];
 
-/* ── Component ──────────────────────────────────────────────── */
 export default function Settings() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -68,8 +66,6 @@ export default function Settings() {
 
     return (
         <div className="settings-page">
-
-            {/* ── Header ──────────────────────────────────── */}
             <header className="settings-header">
                 <button className="settings-back" onClick={() => navigate('/')}>
                     <FiChevronLeft size={16} />
@@ -85,7 +81,6 @@ export default function Settings() {
                 </div>
             </header>
 
-            {/* ── Body ────────────────────────────────────── */}
             <main className="settings-main">
 
                 {sections.map(section => (
@@ -121,7 +116,7 @@ export default function Settings() {
                                 tabIndex={0}
                             >
                                 <div className={`settings-item-icon settings-icon--${item.color}`}>
-                                    <item.icon size={20} />
+                                    <item.icon size={19} />
                                 </div>
                                 <div className="settings-item-text">
                                     <div className="settings-item-label">{item.label}</div>
