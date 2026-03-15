@@ -105,7 +105,6 @@ export default function Newarrival(){
                                     <button className="wishlist-btn" aria-label="Add to wishlist">
                                         <FiHeart size={18} />
                                     </button>
-                                    <button className="quick-add-btn">+ Add to Cart</button>
                                 </div>
                                 <div className="product-info">
                                     <h3 className="product-name">{product.name}</h3>

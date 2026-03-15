@@ -142,7 +142,7 @@ export default function StyleGuide() {
                                         {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% off
                                     </span>
                                 </div>
-                                <button className="genz-add-btn">Add to Cart</button>
+                                <button className="genz-add-btn">View Details</button>
                             </div>
                         </div>
                     </div>
