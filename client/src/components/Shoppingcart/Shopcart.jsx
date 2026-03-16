@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Shopcart.css";
 import { fetchCart, removeFromCart, clearCart } from "./cartUtils";
+import Navbar from "../Navbar/Navbar";
 
 export default function Shopcart() {
   const [cart, setCart] = useState([]);
@@ -9,8 +10,9 @@ export default function Shopcart() {
   useEffect(() => {
     const loadCart = async () => {
       try {
-        const items = await fetchCart();
-        setCart(items);
+        // const items = await fetchCart();
+        // setCart(items);
+        console.log("helloe sir")
       } catch (err) {
         console.log(err);
       }
@@ -34,7 +36,10 @@ export default function Shopcart() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="shopcart">
+      
       <div className="shopcart-header">
         <h2>Your Cart</h2>
       </div>
@@ -78,5 +83,6 @@ export default function Shopcart() {
         )}
       </div>
     </div>
+    </>
   );
 }

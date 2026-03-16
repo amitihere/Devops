@@ -62,4 +62,17 @@ export async function clearCart() {
   }
 }
 
+export async function getCount() {
+  try {
+    const response = await axios.get(`yet to add backend url`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    const serverMsg =
+      err.response?.data?.message || "Failed to get count.";
+    return { success: false, message: serverMsg };
+  }
+}
+
 export { MAX_CART_ITEMS };
