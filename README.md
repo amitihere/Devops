@@ -1,4 +1,4 @@
-# ♻️ Circular Fashion Marketplace – Print-on-Demand & Thrift Exchange Platform
+# ThriftVault
 
 A full-stack **MERN-based circular fashion marketplace** that combines **print-on-demand clothing**, **thrifted fashion resale**, and **upcycling** into a single sustainable platform.
 
