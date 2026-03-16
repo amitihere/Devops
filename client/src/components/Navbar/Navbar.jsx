@@ -7,26 +7,36 @@ export default function Navbar() {
     const [searchQuery, setSearchQuery] = useState('');
     const [user, setUser] = useState(null);
     const [count,setCount] = useState(0);
-    const [loader,setLoader] = useState(true)
-
     const navigate = useNavigate();
 
     useEffect(() => {
-        // const loader = async () => {
-        //     const NumberItems = await getCount()
-        //     // const UserProfile = axios.get("http://localhost:3000/api/user/profile", {
-        //     //     withCredentials: true,
-        //     // })
-        //     setCount(NumberItems);
-        //     // setUser(UserProfile.data);
-        //     setLoader(false);
-        // }
-        // loader();
+        const stored = localStorage.getItem('thriftvault_user');
+        if (stored) {
+            try {
+                setUser(JSON.parse(stored));
+            } catch {
+                setUser(null);
+            }
+        }
+
+        // listen for storage changes (e.g. login in same tab via navigate)
+        const onStorage = () => {
+            const u = localStorage.getItem('thriftvault_user');
+            setUser(u ? JSON.parse(u) : null);
+        };
+        window.addEventListener('storage', onStorage);
+        // also listen for a custom event fired after login/signup
+        window.addEventListener('thriftvault:auth', onStorage);
+        return () => {
+            window.removeEventListener('storage', onStorage);
+            window.removeEventListener('thriftvault:auth', onStorage);
+        };
+        
     }, []);
 
     const handleProfileClick = () => {
         if (!user) {
-            navigate('/login');
+            navigate('/signup');
         } else {
             navigate('/settings');
         }

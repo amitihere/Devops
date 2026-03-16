@@ -7,7 +7,6 @@ import CategoryScroll from './components/CategoryScroll/CategoryScroll'
 
 import HomePage from './pages/HomePage'
 import Login from './pages/Login'
-import Signup from './pages/Signup'
 import Shopcart from './components/Shoppingcart/Shopcart'
 import SellerDashboard from './pages/SellerDashboard'
 import Settings from './pages/Settings'
@@ -36,7 +35,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomeLayout />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/signup" element={<Login />} />
       <Route path="/cart" element={<Shopcart />} />
       <Route path="/seller" element={<SellerDashboard />} />
       <Route path="/settings" element={<Settings />} />
