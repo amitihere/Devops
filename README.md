@@ -6,7 +6,7 @@ This project goes beyond traditional e-commerce by introducing a **credit-based 
 
 ---
 
-## 🌍 Main Idea Behind the Project
+## Main Idea Behind the Project
 
 The fashion industry faces two major problems:
 1. Overproduction of clothing
@@ -24,43 +24,43 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ## 👥 Who This Platform Helps
 
-### 🧑‍🎨 Designers & Creators
+### Designers & Creators
 - Sell designs without holding inventory
 - Collaborate with thrift sellers for upcycled fashion
 
-### ♻️ Thrifters & Resellers
+### Thrifters & Resellers
 - Resell curated thrifted clothing
 - Exchange items using platform credits
 - Reduce waste while earning value
 
-### 🛒 Customers
+### Customers
 - Buy unique, customized apparel
 - Discover affordable thrifted fashion
 - Support sustainable and independent fashion
 
 ---
 
-## 👕 Product Types & Sources
+## Product Types & Sources
 
-### 🖨️ Print-on-Demand Products
+### Print-on-Demand Products
 - Custom-designed t-shirts, hoodies, and apparel
 - Designs uploaded by sellers
 - Products are manufactured only after an order is placed
 - Zero inventory storage required
 
-### ♻️ Thrifted Products
+### Thrifted Products
 - Pre-owned clothing uploaded by users or sellers
 - Each item is unique (quantity = 1)
 - Includes condition, size, and authenticity details
 
-### 🔁 Upcycled Products (Unique Feature)
+### Upcycled Products (Unique Feature)
 - Thrifted items enhanced with new print designs
 - One-of-one customized fashion pieces
 - New product lifecycle created from old clothing
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React.js
@@ -91,9 +91,9 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-## ✨ Core Features
+## Core Features
 
-### 🔐 Authentication & Authorization
+### Authentication & Authorization
 - JWT-based authentication
 - Role-based access control
 - Secure password hashing
@@ -101,7 +101,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-### 🛍️ Marketplace Features
+### Marketplace Features
 - Multi-vendor product listings
 - Separate flows for POD and thrifted items
 - Advanced search and filters
@@ -109,7 +109,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-### 🖨️ Print-on-Demand Workflow
+### Print-on-Demand Workflow
 - Design uploads by creators
 - Size and color variants
 - Order-triggered production flow
@@ -117,7 +117,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-### ♻️ Thrift Exchange System (Standout Feature)
+### Thrift Exchange System (Standout Feature)
 - Thrifted item listing
 - Platform credit system
 - Exchange items using credits
@@ -125,7 +125,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-### 🧑‍💼 Dashboards
+### Dashboards
 #### Seller / Creator Dashboard
 - Product and design management
 - Order tracking
@@ -133,9 +133,9 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-## 🗂️ Project Development Phases
+## Project Development Phases
 
-### 🚀 Phase 1: Foundation & Authentication
+### Phase 1: Foundation & Authentication
 - Project setup (Frontend + Backend)
 - User authentication & RBAC
 - Database schema design
@@ -143,7 +143,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-### 🛒 Phase 2: Core Marketplace
+### Phase 2: Core Marketplace
 - Product listings (POD & Thrifted)
 - Cart, wishlist, checkout
 - Order management
@@ -151,7 +151,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-### 🔁 Phase 3: Circular Economy Features
+### Phase 3: Circular Economy Features
 - Platform credit system
 - Thrift exchange workflow
 - Upcycling product flow
@@ -159,7 +159,7 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ---
 
-### 📊 Phase 4: Advanced & Production Features
+### Phase 4: Advanced & Production Features
 - Payment gateway integration
 - Email notifications
 - Sustainability metrics dashboard
