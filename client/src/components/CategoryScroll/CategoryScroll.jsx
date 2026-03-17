@@ -3,7 +3,7 @@ import './CategoryScroll.css';
 const categories = [
     'Men', 'Women', 'Kids', 'Shoes', 'Bags', 'Outerwear',
     'Tops', 'Bottoms', 'Jewelry', 'Accessories', 'Activewear',
-    'Hats', 'Sunglasses', 'Vintage',
+    'Hats', 'Sunglasses',
 ];
 
 export default function CategoryScroll({ activeCategory, setActiveCategory }) {
