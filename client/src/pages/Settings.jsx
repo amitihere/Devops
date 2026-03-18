@@ -27,9 +27,9 @@ const sections = [
         ],
     },
     {
-        title: 'Preferences',
+        title: 'Contributor',
         items: [
-            { id: 'notifications', icon: FiBell, color: 'indigo', label: 'Notifications', desc: 'Email, push & SMS preferences' },
+            { id: 'seller-profile', icon: FiUser, color: 'indigo', label: 'Seller Profile', desc: 'Manage your store, listings & payouts' },
         ],
     },
     {
@@ -88,7 +88,7 @@ export default function Settings() {
                         <h2 className="settings-section-title">{section.title}</h2>
                         <div className="settings-list">
                             {section.items.map(item => (
-                                <div className="settings-item" key={item.id} id={`setting-${item.id}`} role="button" tabIndex={0}>
+                                <div className="settings-item" key={item.id} id={`setting-${item.id}`} role="button" tabIndex={0} onClick={() => navigate(`/${item.id}`)}>
                                     <div className={`settings-item-icon settings-icon--${item.color}`}>
                                         <item.icon size={20} />
                                     </div>

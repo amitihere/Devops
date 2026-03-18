@@ -4,13 +4,13 @@ import { FiChevronLeft, FiFilePlus, FiShoppingBag } from 'react-icons/fi';
 import './SellerDashboard.css';
 
 const SELLER = {
-    name: 'Priya Sharma',
-    email: 'priya@thriftvault.in',
+    name: 'Default',
+    email: 'default@thriftvault.in',
     phone: '+91 98765 43210',
     location: 'Mumbai, Maharashtra',
-    storeName: 'ThriftByPriya',
+    storeName: 'ThriftByDefault',
     joined: 'January 2024',
-    upi: 'priya@upi',
+    upi: 'default@upi',
 };
 
 export default function SellerDashboard() {
