@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiTag, FiSearch, FiHeart, FiShoppingBag, FiUser, FiSettings, FiCheck } from 'react-icons/fi';
+import { FiTag, FiHeart, FiShoppingBag, FiUser, FiSettings, FiCheck } from 'react-icons/fi';
 import './Navbar.css';
 
 export default function Navbar() {
-    const [searchQuery, setSearchQuery] = useState('');
+
     const [user, setUser] = useState(null);
     const [count,setCount] = useState(0);
     const navigate = useNavigate();
@@ -52,18 +52,7 @@ export default function Navbar() {
                     <span className="brand-name">ThriftVault</span>
                 </a>
 
-                <div className="navbar-search">
-                    <span className="search-icon">
-                        <FiSearch size={18} />
-                    </span>
-                    <input
-                        type="text"
-                        placeholder="Search for vintage finds..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="search-input"
-                    />
-                </div>
+
 
                 <div className="navbar-actions">
                     <button className="nav-btn" title="Wishlist">
