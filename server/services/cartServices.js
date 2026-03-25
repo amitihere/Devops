@@ -43,4 +43,19 @@ const addToCart = async (userId, productId, quantity) => {
   }
 };
 
-module.exports = { addToCart };
+const getCart = async (userId) => {
+  try {
+    const cart = await Cart.findOne({ userId }).populate("items.productId");
+
+    if (!cart) {
+      throw new Error("Cart not found for this user");
+    }
+
+    return cart;
+  } catch (err) {
+    console.error("Get cart error:", err);
+    throw err;
+  }
+};
+
+module.exports = { addToCart, getCart };
