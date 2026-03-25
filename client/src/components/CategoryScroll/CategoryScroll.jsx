@@ -3,7 +3,7 @@ import './CategoryScroll.css';
 
 const categoryData = {
     Men: {
-        path: '/men',
+        path: null,
         sections: [
             {
                 title: 'Topwear',
@@ -105,41 +105,8 @@ const categoryData = {
         path: null,
         sections: [
             {
-                title: 'Bed Linen & Furnishing',
-                items: ['Bedsheets', 'Pillows & Covers', 'Blankets & Quilts', 'Curtains'],
-            },
-        ],
-        sections2: [
-            {
-                title: 'Bath',
-                items: ['Bath Towels', 'Hand Towels', 'Bath Robes', 'Bathroom Accessories'],
-            },
-        ],
-        sections3: [
-            {
-                title: 'Decor',
-                items: ['Candles', 'Photo Frames', 'Wall Art', 'Vases', 'Clocks'],
-            },
-        ],
-    },
-    Beauty: {
-        path: null,
-        sections: [
-            {
-                title: 'Makeup',
-                items: ['Lipstick', 'Foundation', 'Mascara', 'Eyeliner', 'Nail Polish'],
-            },
-        ],
-        sections2: [
-            {
-                title: 'Skincare',
-                items: ['Moisturisers', 'Serums', 'Sunscreens', 'Face Wash', 'Face Masks'],
-            },
-        ],
-        sections3: [
-            {
-                title: 'Haircare',
-                items: ['Shampoo', 'Conditioner', 'Hair Oil', 'Hair Serum', 'Hair Colour'],
+                title: 'Welcome to the ThriftVault',
+                items: ['Discover a world of pre-loved treasures at ThriftVault, where sustainability meets style. Explore our curated collection of second-hand fashion, vintage finds, and unique accessories. Join us in reducing fashion waste while expressing your individuality with one-of-a-kind pieces. Shop consciously, shop ThriftVault.'],
             },
         ],
     },
@@ -163,21 +130,10 @@ const categoryData = {
                 items: ['Bewakoof', 'H&M', 'Zara', 'Urbanic'],
             },
         ],
-    },
-    Studio: {
-        path: null,
-        sections: [
-            {
-                title: 'Explore',
-                items: ['Style Trends', 'Celebrity Looks', 'Fashion Tips', 'Outfit Ideas'],
-            },
-        ],
-        sections2: [],
-        sections3: [],
-    },
+    }
 };
 
-const categoryOrder = ['Men', 'Women', 'Kids', 'Home', 'Beauty', 'GenZ', 'Studio'];
+const categoryOrder = ['Men', 'Women','Home', 'Kids', 'GenZ'];
 
 export default function CategoryScroll({ activeCategory, setActiveCategory }) {
     const navigate = useNavigate();
