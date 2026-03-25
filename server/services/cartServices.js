@@ -58,4 +58,29 @@ const getCart = async (userId) => {
   }
 };
 
-module.exports = { addToCart, getCart };
+const removeFromCart = async (userId, productId) => {
+  try {
+    const cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      throw new Error("Cart not found for this user");
+    }
+
+    const itemIndex = cart.items.findIndex(
+      (item) => item.productId.toString() === productId
+    );
+
+    if (itemIndex === -1) {
+      throw new Error("Item not found in cart");
+    }
+
+    cart.items.splice(itemIndex, 1);
+    await cart.save();
+    return cart;
+  } catch (err) {
+    console.error("Remove from cart error:", err);
+    throw err;
+  }
+};
+
+module.exports = { addToCart, getCart, removeFromCart };
