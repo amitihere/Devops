@@ -5,33 +5,40 @@ import Navbar from "../Navbar/Navbar";
 
 export default function Shopcart() {
   const [cart, setCart] = useState([]);
-  const [warning, setWarning] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const loadCart = async () => {
-      try {
-        // const items = await fetchCart();
-        // setCart(items);
-        console.log("helloe sir")
-      } catch (err) {
-        console.log(err);
-      }
-    };
     loadCart();
   }, []);
 
-  const handleRemove = async (itemId) => {
-    const result = await removeFromCart(itemId);
-    if (result.success) {
-      setCart((prev) => prev.filter((item) => item._id !== itemId));
+  const loadCart = async () => {
+    try {
+      const data = await fetchCart();
+      setCart(data.cart?.items || []);
+    } catch (err) {
+      console.log("Cart fetch error:", err);
+    }
+  };
+
+  const handleRemove = async (productId) => {
+    try {
+      await removeFromCart(productId);
+      setCart((prev) => prev.filter((item) => item.productId?._id !== productId));
+      setMessage("Item removed from cart");
+      setTimeout(() => setMessage(""), 2000);
+    } catch (err) {
+      setMessage(err.response?.data?.message || "Failed to remove item");
     }
   };
 
   const handleClear = async () => {
-    const result = await clearCart();
-    if (result.success) {
+    try {
+      await clearCart();
       setCart([]);
-      setWarning("");
+      setMessage("Cart cleared");
+      setTimeout(() => setMessage(""), 2000);
+    } catch (err) {
+      setMessage(err.response?.data?.message || "Failed to clear cart");
     }
   };
 
@@ -44,7 +51,7 @@ export default function Shopcart() {
         <h2>Your Cart</h2>
       </div>
 
-      {warning && <div className="shopcart-warning">⚠️ {warning}</div>}
+      {message && <div className="shopcart-warning">{message}</div>}
 
       <div className="shopcart-body">
         {cart.length === 0 ? (
@@ -60,17 +67,18 @@ export default function Shopcart() {
             {cart.map((item) => (
               <div key={item._id} className="shopcart-item">
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.productId?.image}
+                  alt={item.productId?.name}
                   className="shopcart-item-image"
                 />
                 <div className="shopcart-item-info">
-                  <h3 className="shopcart-item-name">{item.name}</h3>
-                  <p className="shopcart-item-price">₹{item.price}</p>
+                  <h3 className="shopcart-item-name">{item.productId?.name}</h3>
+                  <p className="shopcart-item-price">₹{item.productId?.price}</p>
+                  <p className="shopcart-item-qty">Qty: {item.quantity}</p>
                 </div>
                 <button
                   className="shopcart-item-remove"
-                  onClick={() => handleRemove(item._id)}
+                  onClick={() => handleRemove(item.productId?._id)}
                 >
                   Remove
                 </button>

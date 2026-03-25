@@ -1,78 +1,44 @@
 import axios from "axios";
 
-const MAX_CART_ITEMS = 5;
+const BASE = "http://localhost:3000/api/user";
+
+function getUserId() {
+  const stored = localStorage.getItem("thriftvault_user");
+  if (!stored) return null;
+  const user = JSON.parse(stored);
+  return user._id;
+}
 
 export async function fetchCart() {
-  const response = await axios.get(`yet to add backend url`, {
-    withCredentials: true,
+  const userId = getUserId();
+  const res = await axios.get(`${BASE}/shop/availableItems/cart`, {
+    params: { userId },
   });
-  return response.data; 
+  return res.data;
 }
 
-export async function addToCart(item, currentCount) {
-  if (currentCount >= MAX_CART_ITEMS) {
-    return {
-      success: false,
-      message:
-        "Your cart already has 5 items — the maximum allowed. Please clear your cart first before adding more.",
-    };
-  }
-
-  try {
-    const response = await axios.post(
-      `yet to add backend url`,
-      { item },
-      { withCredentials: true }
-    );
-
-    return {
-      success: true,
-      message: "Item added to cart!",
-      data: response.data,
-    };
-  } catch (err) {
-    const serverMsg =
-      err.response?.data?.message || "Failed to add item to cart.";
-    return { success: false, message: serverMsg };
-  }
+export async function addToCart(productId, quantity = 1) {
+  const userId = getUserId();
+  const res = await axios.post(`${BASE}/shop/items/cart`, {
+    userId,
+    productId,
+    quantity,
+  });
+  return res.data;
 }
-export async function removeFromCart(itemId) {
-  try {
-    await axios.delete(`yet to add backend url`, {
-      withCredentials: true,
-    });
-    return { success: true, message: "Item removed." };
-  } catch (err) {
-    const serverMsg =
-      err.response?.data?.message || "Failed to remove item.";
-    return { success: false, message: serverMsg };
-  }
+
+export async function removeFromCart(productId) {
+  const userId = getUserId();
+  const res = await axios.delete(`${BASE}/shop/items/cart`, {
+    data: { userId, productId },
+  });
+  return res.data;
 }
 
 export async function clearCart() {
-  try {
-    await axios.delete(`yet to add backend url`, {
-      withCredentials: true,
-    });
-    return { success: true, message: "Cart cleared." };
-  } catch (err) {
-    const serverMsg =
-      err.response?.data?.message || "Failed to clear cart.";
-    return { success: false, message: serverMsg };
-  }
+  const userId = getUserId();
+  const res = await axios.delete(`${BASE}/shop/cart/clear`, {
+    data: { userId },
+  });
+  return res.data;
 }
-
-export async function getCount() {
-  try {
-    const response = await axios.get(`yet to add backend url`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (err) {
-    const serverMsg =
-      err.response?.data?.message || "Failed to get count.";
-    return { success: false, message: serverMsg };
-  }
-}
-
-export { MAX_CART_ITEMS };
