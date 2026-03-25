@@ -1,33 +1,39 @@
 const mongoose = require("mongoose");
-const userDatasetSchema = new mongoose.Schema(
+
+const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
-      trim: true,
+      required: true
     },
     email: {
       type: String,
       required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
+      unique: true
     },
     phone: {
       type: String,
-      required: true,
-      trim: true,
+      required: true
     },
     password: {
       type: String,
-      required: true,
+      required: true
+    },
+    role: {
+      type: String,
+      enum: ["buyer", "seller"],
+      default: "buyer",
+    },
+
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      pincode: String,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const UserDataset = mongoose.model("UserDataset", userDatasetSchema);
-
-module.exports = { UserDataset };
+const User = mongoose.model("User", userSchema);
+module.exports = User;
