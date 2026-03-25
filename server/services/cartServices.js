@@ -83,4 +83,21 @@ const removeFromCart = async (userId, productId) => {
   }
 };
 
-module.exports = { addToCart, getCart, removeFromCart };
+const clearCart = async (userId) => {
+  try {
+    const cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      throw new Error("Cart not found for this user");
+    }
+
+    cart.items = [];
+    await cart.save();
+    return cart;
+  } catch (err) {
+    console.error("Clear cart error:", err);
+    throw err;
+  }
+};
+
+module.exports = { addToCart, getCart, removeFromCart, clearCart };

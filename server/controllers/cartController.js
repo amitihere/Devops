@@ -1,4 +1,4 @@
-const { addToCart, getCart, removeFromCart } = require("../services/cartServices");
+const { addToCart, getCart, removeFromCart, clearCart } = require("../services/cartServices");
 
 const addToCartController = async (req, res) => {
   const { userId, productId, quantity } = req.body;
@@ -33,4 +33,15 @@ const removeFromCartController = async (req, res) => {
   }
 };
 
-module.exports = { addToCartController, getCartController, removeFromCartController };
+const clearCartController = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const updatedCart = await clearCart(userId);
+    return res.status(200).json({ message: "Cart cleared successfully", cart: updatedCart });
+  } catch (err) {
+    res.status(500).json({ message: "Error clearing cart", error: err.message });
+  }
+};
+
+module.exports = { addToCartController, getCartController, removeFromCartController, clearCartController };
