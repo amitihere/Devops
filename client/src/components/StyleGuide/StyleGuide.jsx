@@ -9,7 +9,6 @@ const genZPicks = [
         vibe: 'Cold-weather flex',
         image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80',
         price: 1299,
-        originalPrice: 3499,
         sizes: ['XS', 'S', 'M', 'L', 'XL'],
         tags: ['Streetwear', 'Winter'],
     },
@@ -20,7 +19,6 @@ const genZPicks = [
         vibe: 'Y2K meets today',
         image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&q=80',
         price: 899,
-        originalPrice: 2299,
         sizes: ['S', 'M', 'L', 'XL'],
         tags: ['Y2K', 'Casual'],
     },
@@ -31,7 +29,6 @@ const genZPicks = [
         vibe: 'Soft aesthetic energy',
         image: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600&q=80',
         price: 749,
-        originalPrice: 1899,
         sizes: ['XS', 'S', 'M', 'L'],
         tags: ['Cozy', 'Aesthetic'],
     },
@@ -42,7 +39,6 @@ const genZPicks = [
         vibe: 'Grunge with attitude',
         image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80',
         price: 1799,
-        originalPrice: 4999,
         sizes: ['S', 'M', 'L'],
         tags: ['Grunge', 'Statement'],
     },
@@ -53,7 +49,6 @@ const genZPicks = [
         vibe: '90s denim renaissance',
         image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80',
         price: 999,
-        originalPrice: 2599,
         sizes: ['XS', 'S', 'M', 'L', 'XL'],
         tags: ['90s', 'Denim'],
     },
@@ -64,7 +59,6 @@ const genZPicks = [
         vibe: 'Effortlessly cool',
         image: 'https://images.unsplash.com/photo-1548126032-079a0fb0099d?w=600&q=80',
         price: 1099,
-        originalPrice: 2899,
         sizes: ['XS', 'S', 'M'],
         tags: ['Streetwear', 'Minimal'],
     },
@@ -137,10 +131,6 @@ export default function StyleGuide() {
                             <div className="genz-card-footer">
                                 <div className="genz-pricing">
                                     <span className="genz-price">₹{item.price.toLocaleString('en-IN')}</span>
-                                    <span className="genz-original">₹{item.originalPrice.toLocaleString('en-IN')}</span>
-                                    <span className="genz-off">
-                                        {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% off
-                                    </span>
                                 </div>
                                 <button className="genz-add-btn">View Details</button>
                             </div>
@@ -149,7 +139,6 @@ export default function StyleGuide() {
                 ))}
             </div>
 
-            {/* Bottom Banner */}
             <div className="genz-banner">
                 <div className="genz-banner-text">
                     <span className="genz-banner-tag">No Cap</span>

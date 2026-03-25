@@ -141,20 +141,6 @@
     color: var(--text-primary);
 }
 
-.product-original {
-    font-size: 13px;
-    color: var(--text-muted);
-    text-decoration: line-through;
-}
-
-.product-discount {
-    font-size: 11px;
-    font-weight: 600;
-    color: #e53935;
-    background: #fde8e8;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
 
 /* ---------- EMPTY STATE ---------- */
 .empty-state {

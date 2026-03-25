@@ -8,7 +8,6 @@ export default function Newarrival(){
         id: 1,
         name: 'Vintage Denim Jacket',
         price: 2899,
-        originalPrice: 7499,
         image: 'https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=500&q=80',
         tag: 'Just In',
         category: 'Outerwear',
@@ -17,7 +16,6 @@ export default function Newarrival(){
         id: 2,
         name: 'Retro Floral Dress',
         price: 2399,
-        originalPrice: 5499,
         image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&q=80',
         tag: 'Popular',
         category: 'Women',
@@ -26,7 +24,6 @@ export default function Newarrival(){
         id: 3,
         name: 'Classic White Sneakers',
         price: 1849,
-        originalPrice: 4599,
         image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&q=80',
         tag: null,
         category: 'Shoes',
@@ -35,7 +32,6 @@ export default function Newarrival(){
         id: 4,
         name: 'Leather Crossbody Bag',
         price: 3349,
-        originalPrice: 7999,
         image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80',
         tag: 'Best Seller',
         category: 'Bags',
@@ -44,7 +40,6 @@ export default function Newarrival(){
         id: 5,
         name: 'Oversized Knit Sweater',
         price: 2199,
-        originalPrice: 4999,
         image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&q=80',
         tag: null,
         category: 'Tops',
@@ -53,7 +48,6 @@ export default function Newarrival(){
         id: 6,
         name: 'High-Waisted Jeans',
         price: 2649,
-        originalPrice: 5999,
         image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&q=80',
         tag: 'Just In',
         category: 'Bottoms',
@@ -62,7 +56,6 @@ export default function Newarrival(){
         id: 7,
         name: 'Graphic Tee – Retro',
         price: 1249,
-        originalPrice: 2999,
         image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&q=80',
         tag: null,
         category: 'Tops',
@@ -71,7 +64,6 @@ export default function Newarrival(){
         id: 8,
         name: 'Corduroy Trousers',
         price: 2449,
-        originalPrice: 5699,
         image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500&q=80',
         tag: 'Popular',
         category: 'Men',
@@ -111,17 +103,6 @@ export default function Newarrival(){
                                     <div className="product-pricing">
                                         <span className="product-price">
                                             ₹{product.price.toLocaleString('en-IN')}
-                                        </span>
-                                        <span className="product-original">
-                                            ₹{product.originalPrice.toLocaleString('en-IN')}
-                                        </span>
-                                        <span className="product-discount">
-                                            {Math.round(
-                                                ((product.originalPrice - product.price) /
-                                                    product.originalPrice) *
-                                                100
-                                            )}
-                                            % off
                                         </span>
                                     </div>
                                 </div>

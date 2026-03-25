@@ -319,21 +319,6 @@
     color: #1a1a1a;
 }
 
-.genz-original {
-    font-size: 0.82rem;
-    color: #aaa;
-    text-decoration: line-through;
-}
-
-.genz-off {
-    font-size: 0.72rem;
-    font-weight: 800;
-    color: #c0392b;
-    background: #fdf0ef;
-    padding: 2px 7px;
-    border-radius: 20px;
-}
-
 .genz-add-btn {
     background: #1a1a1a;
     color: #fff;
