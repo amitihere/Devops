@@ -12,10 +12,10 @@ const transporter = nodemailer.createTransport({
 
 const signupController = async (req,res) => {
 
-    const {username,email,phone,password} = req.body
+    const {username,email,phone,password,role} = req.body
 
     try{
-        const completeData = {username,email,phone,password}
+        const completeData = {username,email,phone,password,role}
         const newUser = await createNewUser(completeData)
         const info = await transporter.sendMail({
         from: `"Mr Thrift ✈️" <${process.env.SMTP_USER}>`,

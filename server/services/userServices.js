@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
-const {UserDataset} = require("../schema/userDataset");
+const User = require("../schema/userDataset");
 const createNewUser = async (data) => {
   try {
-    const existingUser = await UserDataset.findOne({
+    const existingUser = await User.findOne({
       $or: [{ email: data.email }, { phone: data.phone }]
     });
 
@@ -24,7 +24,7 @@ const createNewUser = async (data) => {
 };
 const loginUser = async (data) => {
   try {
-    const NotexistingUser = await UserDataset.findOne({ email: data.email });
+    const NotexistingUser = await User.findOne({ email: data.email });
 
     if (!NotexistingUser) {
       throw new Error("User with given email or phone does not exist");
