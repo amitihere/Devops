@@ -17,11 +17,13 @@ export async function fetchCart() {
   return res.data;
 }
 
-export async function addToCart(productId, quantity = 1) {
+export async function addToCart(product, quantity = 1) {
   const userId = getUserId();
   const res = await axios.post(`${BASE}/shop/items/cart`, {
     userId,
-    productId,
+    productId: product._id || product.id,
+    name: product.name,
+    price: product.price,
     quantity,
   });
   return res.data;

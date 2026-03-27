@@ -138,6 +138,20 @@
     background: #f0fdf4;
 }
 
+/* Sell button */
+.sell-btn {
+    width: auto !important;
+    padding: 0 12px;
+    gap: 5px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #070707;
+    color: #fff !important;
+}
+.sell-btn:hover { opacity: 0.85; background: #070707; color: #fff !important; }
+.sell-label { font-family: inherit; }
+
 @media (max-width: 768px) {
     .navbar-inner {
         padding: 0 16px;

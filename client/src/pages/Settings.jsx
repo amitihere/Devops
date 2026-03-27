@@ -12,38 +12,32 @@ const sections = [
     {
         title: 'Account',
         items: [
-            { id: 'profile',   icon: FiUser,       color: 'blue',   label: 'Profile',            desc: 'Name, email, phone & profile photo' },
-            { id: 'security',  icon: FiLock,       color: 'purple', label: 'Security',           desc: 'Password, two-factor & login activity' },
-            { id: 'address',   icon: FiMapPin,     color: 'green',  label: 'Addresses',          desc: 'Saved shipping & billing addresses' },
-            { id: 'payment',   icon: FiCreditCard, color: 'orange', label: 'Payment Methods',    desc: 'Cards, UPI & wallet preferences' },
+            { id: 'profile', icon: FiUser, color: 'blue', label: 'Profile', desc: 'Name, email, phone & profile photo' },
+            { id: 'security', icon: FiLock, color: 'purple', label: 'Security', desc: 'Password, two-factor & login activity' },
+            { id: 'address', icon: FiMapPin, color: 'green', label: 'Addresses', desc: 'Saved shipping & billing addresses' },
+            { id: 'payment', icon: FiCreditCard, color: 'orange', label: 'Payment Methods', desc: 'Cards, UPI & wallet preferences' },
         ],
     },
     {
         title: 'Shopping',
         items: [
-            { id: 'cart',      icon: FiShoppingBag, color: 'pink',  label: 'Cart',               desc: 'View and manage items in your cart' },
-            { id: 'orders',    icon: FiFileText,    color: 'teal',  label: 'Orders',             desc: 'Track, return & review past orders' },
-            { id: 'wishlist',  icon: FiHeart,       color: 'red',   label: 'Wishlist',           desc: 'Items you\'ve saved for later' },
-        ],
-    },
-    {
-        title: 'Contributor',
-        items: [
-            { id: 'seller-profile', icon: FiUser, color: 'indigo', label: 'Seller Profile', desc: 'Manage your store, listings & payouts' },
+            { id: 'cart', icon: FiShoppingBag, color: 'pink', label: 'Cart', desc: 'View and manage items in your cart' },
+            { id: 'orders', icon: FiFileText, color: 'teal', label: 'Orders', desc: 'Track, return & review past orders' },
+            { id: 'wishlist', icon: FiHeart, color: 'red', label: 'Wishlist', desc: 'Items you\'ve saved for later' },
         ],
     },
     {
         title: 'Support',
         items: [
-            { id: 'help',  icon: FiHelpCircle, color: 'amber', label: 'Help Centre',       desc: 'FAQs, contact support & chat' },
-            { id: 'about', icon: FiInfo,        color: 'slate', label: 'About ThriftVault', desc: 'Version, terms & privacy policy' },
+            { id: 'help', icon: FiHelpCircle, color: 'amber', label: 'Help Centre', desc: 'FAQs, contact support & chat' },
+            { id: 'about', icon: FiInfo, color: 'slate', label: 'About ThriftVault', desc: 'Version, terms & privacy policy' },
         ],
     },
 ];
 
 const dangerItems = [
-    { id: 'logout', icon: FiLogOut,  color: 'red', label: 'Log Out',        desc: 'Sign out of your account' },
-    { id: 'delete', icon: FiTrash2,  color: 'red', label: 'Delete Account', desc: 'Permanently remove your account & data', danger: true },
+    { id: 'logout', icon: FiLogOut, color: 'red', label: 'Log Out', desc: 'Sign out of your account' },
+    { id: 'delete', icon: FiTrash2, color: 'red', label: 'Delete Account', desc: 'Permanently remove your account & data', danger: true },
 ];
 
 export default function Settings() {
@@ -88,7 +82,7 @@ export default function Settings() {
                         <h2 className="settings-section-title">{section.title}</h2>
                         <div className="settings-list">
                             {section.items.map(item => (
-                                <div className="settings-item" key={item.id} id={`setting-${item.id}`} role="button" tabIndex={0} onClick={() => navigate(`/${item.id}`)}>
+                                <div className="settings-item" key={item.id} id={`setting-${item.id}`} role="button" tabIndex={0} onClick={() => {navigate(`/${item.id}`)}}>
                                     <div className={`settings-item-icon settings-icon--${item.color}`}>
                                         <item.icon size={20} />
                                     </div>

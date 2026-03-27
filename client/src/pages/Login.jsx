@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FiTag, FiArrowLeft, FiMail, FiLock, FiUser, FiPhone } from 'react-icons/fi';
 import './Auth.css';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
-export default function Login() {
+export default function Auth() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const [mode, setMode] = useState(location.pathname === '/signup' ? 'signup' : 'login');
+    const [path, setPath] = useState('login');
 
     const [loginForm, setLoginForm] = useState({ email: '', password: '' });
     const [signupForm, setSignupForm] = useState({ username: '', email: '', phone: '', password: '' });
@@ -16,23 +15,31 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
 
     const handleChange = (setter) => (e) => {
-        setter(prev => ({ ...prev, [e.target.name]: e.target.value }));
-        setError('');
+        const { name, value } = e.target;
+        setter(prev => ({ ...prev, [name]: value }));
     };
 
     const submit = async (url, body) => {
         setLoading(true);
         setError('');
+
         try {
             const res = await fetch(`${API_BASE}${url}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             });
+
             const data = await res.json();
-            if (!res.ok) throw new Error(data.error || data.message || 'Something went wrong');
-            localStorage.setItem('thriftvault_user', JSON.stringify(data.user));
-            window.dispatchEvent(new Event('thriftvault:auth'));
+
+            if (data.user) {
+                localStorage.setItem('thriftvault_user', JSON.stringify(data.user));
+            }
+
+            if (data.token) {
+                localStorage.setItem('thriftvault_token', data.token);
+            }
+
             navigate('/');
         } catch (err) {
             setError(err.message);
@@ -43,84 +50,139 @@ export default function Login() {
 
     return (
         <div className="auth-root">
-            {/* ── LEFT ── */}
+            {/* LEFT */}
             <div className="auth-left">
                 <div className="auth-blob auth-blob--1" />
                 <div className="auth-blob auth-blob--2" />
                 <div className="auth-left-inner">
                     <FiTag size={32} className="auth-left-icon" />
-                    <h2 className="auth-left-title">Welcome to<br /><span>ThriftVault</span></h2>
-                    <p className="auth-left-sub">Your curated marketplace for pre-loved fashion &amp; unique finds.</p>
+                    <h2 className="auth-left-title">
+                        Welcome to<br /><span>ThriftVault</span>
+                    </h2>
+                    <p className="auth-left-sub">
+                        Your curated marketplace for pre-loved fashion & unique finds.
+                    </p>
                 </div>
             </div>
 
-            {/* ── RIGHT ── */}
+            {/* RIGHT */}
             <div className="auth-right">
                 <button className="auth-back" onClick={() => navigate('/')}>
                     <FiArrowLeft size={15} /> Back
                 </button>
 
                 <div className="auth-card">
-                    <h1 className="auth-title">{mode === 'login' ? 'Log in' : 'Sign up'}</h1>
+                    <h1 className="auth-title">{path === 'login' ? 'Log in' : 'Sign up'}</h1>
+
                     <p className="auth-subtitle">
-                        {mode === 'login' ? 'Sign in to your account' : 'Create a new account'}
+                        {path === 'login'
+                            ? 'Sign in to your account'
+                            : 'Create a new account'}
                     </p>
 
-                    <form className="auth-form" onSubmit={(e) => {
-                        e.preventDefault();
-                        mode === 'login'
-                            ? submit('/api/user/auth/login', loginForm)
-                            : submit('/api/user/auth/signup', signupForm);
-                    }}>
-                        {mode === 'signup' && (
-                            <Field id="su-user" label="Username" icon={<FiUser size={15} />}
-                                name="username" type="text" placeholder="e.g. vintagelover"
-                                value={signupForm.username} onChange={handleChange(setSignupForm)} />
+                    <form
+                        className="auth-form"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            path === 'login'
+                                ? submit('/api/user/auth/login', loginForm)
+                                : submit('/api/user/auth/signup', signupForm);
+                        }}
+                    >
+                        {/* USERNAME */}
+                        {path === 'signup' && (
+                            <div className="auth-field">
+                                <label>Username</label>
+                                <div className="auth-input-wrap">
+                                    <span className="auth-input-icon"><FiUser size={15} /></span>
+                                    <input
+                                        name="username"
+                                        type="text"
+                                        placeholder="e.g. vintagelover"
+                                        value={signupForm.username}
+                                        onChange={handleChange(setSignupForm)}
+                                        required
+                                    />
+                                </div>
+                            </div>
                         )}
 
-                        <Field id={`${mode}-email`} label="Email" icon={<FiMail size={15} />}
-                            name="email" type="email" placeholder="you@example.com"
-                            value={mode === 'login' ? loginForm.email : signupForm.email}
-                            onChange={handleChange(mode === 'login' ? setLoginForm : setSignupForm)} />
+                        {/* EMAIL */}
+                        <div className="auth-field">
+                            <label>Email</label>
+                            <div className="auth-input-wrap">
+                                <span className="auth-input-icon"><FiMail size={15} /></span>
+                                <input
+                                    name="email"
+                                    type="email"
+                                    placeholder="you@example.com"
+                                    value={path === 'login' ? loginForm.email : signupForm.email}
+                                    onChange={handleChange(path === 'login' ? setLoginForm : setSignupForm)}
+                                    required
+                                />
+                            </div>
+                        </div>
 
-                        {mode === 'signup' && (
-                            <Field id="su-phone" label="Phone" icon={<FiPhone size={15} />}
-                                name="phone" type="tel" placeholder="+91 98765 43210"
-                                value={signupForm.phone} onChange={handleChange(setSignupForm)} />
+                        {/* PHONE */}
+                        {path === 'signup' && (
+                            <div className="auth-field">
+                                <label>Phone</label>
+                                <div className="auth-input-wrap">
+                                    <span className="auth-input-icon"><FiPhone size={15} /></span>
+                                    <input
+                                        name="phone"
+                                        type="tel"
+                                        placeholder="+91 98765 43210"
+                                        value={signupForm.phone}
+                                        onChange={handleChange(setSignupForm)}
+                                        required
+                                    />
+                                </div>
+                            </div>
                         )}
 
-                        <Field id={`${mode}-pw`} label="Password" icon={<FiLock size={15} />}
-                            name="password" type="password"
-                            placeholder={mode === 'login' ? 'Your password' : 'At least 8 characters'}
-                            value={mode === 'login' ? loginForm.password : signupForm.password}
-                            onChange={handleChange(mode === 'login' ? setLoginForm : setSignupForm)} />
+                        {/* PASSWORD */}
+                        <div className="auth-field">
+                            <label>Password</label>
+                            <div className="auth-input-wrap">
+                                <span className="auth-input-icon"><FiLock size={15} /></span>
+                                <input
+                                    name="password"
+                                    type="password"
+                                    placeholder={path === 'login' ? 'Your password' : 'At least 8 characters'}
+                                    value={path === 'login' ? loginForm.password : signupForm.password}
+                                    onChange={handleChange(path === 'login' ? setLoginForm : setSignupForm)}
+                                    required
+                                />
+                            </div>
+                        </div>
 
                         {error && <p className="auth-error">{error}</p>}
 
                         <button type="submit" className="auth-btn" disabled={loading}>
-                            {loading ? 'Please wait…' : mode === 'login' ? 'Log in' : 'Create Account'}
+                            {loading
+                                ? 'Please wait…'
+                                : path === 'login'
+                                    ? 'Log in'
+                                    : 'Create Account'}
                         </button>
                     </form>
 
                     <p className="auth-switch">
-                        {mode === 'login' ? "Don't have an account? " : 'Already have an account? '}
-                        <button type="button" onClick={() => { setMode(mode === 'login' ? 'signup' : 'login'); setError(''); }}>
-                            {mode === 'login' ? 'Sign up' : 'Log in'}
+                        {path === 'login'
+                            ? "Don't have an account? "
+                            : 'Already have an account? '}
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setPath(path === 'login' ? 'signup' : 'login');
+                                setError('');
+                            }}
+                        >
+                            {path === 'login' ? 'Sign up' : 'Log in'}
                         </button>
                     </p>
                 </div>
-            </div>
-        </div>
-    );
-}
-
-function Field({ id, label, icon, ...inputProps }) {
-    return (
-        <div className="auth-field">
-            <label htmlFor={id}>{label}</label>
-            <div className="auth-input-wrap">
-                <span className="auth-input-icon">{icon}</span>
-                <input id={id} required {...inputProps} />
             </div>
         </div>
     );

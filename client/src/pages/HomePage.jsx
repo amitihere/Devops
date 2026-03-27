@@ -39,10 +39,10 @@ const trendingCollections = [
 ];
 
 const perks = [
-    { icon: FiTruck,       title: 'Free Shipping',  desc: 'On orders over ₹2,999' },
-    { icon: FiRotateCcw,   title: 'Easy Returns',   desc: '30-day hassle-free' },
+    { icon: FiTruck, title: 'Free Shipping', desc: 'On orders over ₹2,999' },
+    { icon: FiRotateCcw, title: 'Easy Returns', desc: '30-day hassle-free' },
     { icon: FiCheckCircle, title: 'Quality Checked', desc: 'Every item inspected' },
-    { icon: FiFeather,     title: 'Eco Friendly',   desc: 'Sustainable fashion' },
+    { icon: FiFeather, title: 'Eco Friendly', desc: 'Sustainable fashion' },
 ];
 
 export default function HomePage() {
@@ -79,7 +79,7 @@ export default function HomePage() {
             </section>
 
             {/* New Arrivals */}
-            <Newarrival/>
+            <Newarrival />
 
             {/* Trending Collections */}
             <section className="section">

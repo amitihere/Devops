@@ -6,37 +6,31 @@ import './Navbar.css';
 export default function Navbar() {
 
     const [user, setUser] = useState(null);
-    const [count,setCount] = useState(0);
+    const [count, setCount] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const stored = localStorage.getItem('thriftvault_user');
-        if (stored) {
-            try {
-                setUser(JSON.parse(stored));
-            } catch {
-                setUser(null);
-            }
-        }
+        const loader = async () => {
+            // try{
+            //     const stored = localStorage.getItem('thriftvault_user');
+            //     if (stored) {
+            //         const user = JSON.parse(stored);
+            //         console.log('Loaded user from localStorage:', user);
+            //         setUser(user);
+            // }
+            // } catch {
+            //     setUser(null);
+            // }
+            localStorage.clear();
+        };
 
-        // listen for storage changes (e.g. login in same tab via navigate)
-        const onStorage = () => {
-            const u = localStorage.getItem('thriftvault_user');
-            setUser(u ? JSON.parse(u) : null);
-        };
-        window.addEventListener('storage', onStorage);
-        // also listen for a custom event fired after login/signup
-        window.addEventListener('thriftvault:auth', onStorage);
-        return () => {
-            window.removeEventListener('storage', onStorage);
-            window.removeEventListener('thriftvault:auth', onStorage);
-        };
-        
+        loader();
+
     }, []);
 
     const handleProfileClick = () => {
         if (!user) {
-            navigate('/signup');
+            navigate('/login');
         } else {
             navigate('/settings');
         }

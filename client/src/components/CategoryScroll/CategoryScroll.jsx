@@ -133,7 +133,7 @@ const categoryData = {
     }
 };
 
-const categoryOrder = ['Men', 'Women','Home', 'Kids', 'GenZ'];
+const categoryOrder = ['Men', 'Women', 'Home', 'Kids', 'GenZ'];
 
 export default function CategoryScroll({ activeCategory, setActiveCategory }) {
     const navigate = useNavigate();
