@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 const userInfo = require('./routes/catalog')
 
-app.use("/api/user",userInfo)
+app.use("/api/user", userInfo)
 
 
 mongoose.connect(process.env.MONGO_URI)

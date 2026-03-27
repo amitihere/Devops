@@ -1,7 +1,5 @@
 const signupMiddle = (req, res, next) => {
-  const { username, email, phone, password, role } = req.body;
-
-  console.log("middle");
+  const { username, email, phone, password } = req.body;
 
   function isValid(value) {
     return /^[a-zA-Z0-9]+$/.test(value);
@@ -22,9 +20,6 @@ const signupMiddle = (req, res, next) => {
     return res
       .status(400)
       .json({ message: "Phone number must be exactly 10 digits" });
-  }
-  if (!role) {
-    req.body.role = "buyer";
   }
 
   next();

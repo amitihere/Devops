@@ -11,7 +11,7 @@ const createNewUser = async (data) => {
     }
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
-    const newUser = await UserDataset.create({
+    const newUser = await User.create({
       ...data,
       password: hashedPassword
     });
