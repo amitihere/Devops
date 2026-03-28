@@ -1,70 +1,7 @@
 import { FiHeart } from 'react-icons/fi';
 import './StyleGuide.css';
-
-const genZPicks = [
-    {
-        id: 1,
-        label: 'Trending Now',
-        title: 'Oversized Puffer Jacket',
-        vibe: 'Cold-weather flex',
-        image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80',
-        price: 1299,
-        sizes: ['XS', 'S', 'M', 'L', 'XL'],
-        tags: ['Streetwear', 'Winter'],
-    },
-    {
-        id: 2,
-        label: 'Top Pick',
-        title: 'Baggy Cargo Pants',
-        vibe: 'Y2K meets today',
-        image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&q=80',
-        price: 899,
-        sizes: ['S', 'M', 'L', 'XL'],
-        tags: ['Y2K', 'Casual'],
-    },
-    {
-        id: 3,
-        label: 'Fan Favourite',
-        title: 'Washed Hoodie',
-        vibe: 'Soft aesthetic energy',
-        image: 'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=600&q=80',
-        price: 749,
-        sizes: ['XS', 'S', 'M', 'L'],
-        tags: ['Cozy', 'Aesthetic'],
-    },
-    {
-        id: 4,
-        label: 'Just Dropped',
-        title: 'Vintage Leather Jacket',
-        vibe: 'Grunge with attitude',
-        image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80',
-        price: 1799,
-        sizes: ['S', 'M', 'L'],
-        tags: ['Grunge', 'Statement'],
-    },
-    {
-        id: 5,
-        label: 'Core Staple',
-        title: 'Wide-Leg Denim',
-        vibe: '90s denim renaissance',
-        image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80',
-        price: 999,
-        sizes: ['XS', 'S', 'M', 'L', 'XL'],
-        tags: ['90s', 'Denim'],
-    },
-    {
-        id: 6,
-        label: 'Viral Piece',
-        title: 'Cropped Bomber Jacket',
-        vibe: 'Effortlessly cool',
-        image: 'https://images.unsplash.com/photo-1548126032-079a0fb0099d?w=600&q=80',
-        price: 1099,
-        sizes: ['XS', 'S', 'M'],
-        tags: ['Streetwear', 'Minimal'],
-    },
-];
-
-const vibeFilters = ['All', 'Streetwear', 'Y2K', 'Aesthetic', 'Grunge', 'Denim'];
+import { genZPicks } from '../../utils/dummy';
+import { vibeFilters } from '../../utils/dummy';
 
 export default function StyleGuide() {
     return (
