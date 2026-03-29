@@ -24,15 +24,6 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ## 👥 Who This Platform Helps
 
-### Designers & Creators
-- Sell designs without holding inventory
-- Collaborate with thrift sellers for upcycled fashion
-
-### Thrifters & Resellers
-- Resell curated thrifted clothing
-- Exchange items using platform credits
-- Reduce waste while earning value
-
 ### Customers
 - Buy unique, customized apparel
 - Discover affordable thrifted fashion
@@ -50,7 +41,6 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ### Thrifted Products
 - Pre-owned clothing uploaded by users or sellers
-- Each item is unique (quantity = 1)
 - Includes condition, size, and authenticity details
 
 ### Upcycled Products (Unique Feature)
@@ -71,7 +61,6 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 - Express.js
 - RESTful APIs
 - JWT Authentication
-- Role-Based Access Control (Admin, Seller, User)
 
 ### Database
 - MongoDB Atlas
@@ -84,10 +73,8 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 - Nodemailer (email notifications)
 
 ### Deployment & Tools
-- Vercel / Netlify (Frontend)
-- Render / AWS (Backend)
 - GitHub Actions (CI/CD – optional)
-- Docker (optional)
+- Docker
 
 ---
 
@@ -95,7 +82,6 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 
 ### Authentication & Authorization
 - JWT-based authentication
-- Role-based access control
 - Secure password hashing
 - Protected routes and APIs
 
@@ -122,14 +108,6 @@ Instead of just *buying new clothes*, users actively participate in **reusing, r
 - Platform credit system
 - Exchange items using credits
 - Hybrid checkout (credits + cash)
-
----
-
-### Dashboards
-#### Seller / Creator Dashboard
-- Product and design management
-- Order tracking
-- Earnings overview
 
 ---
 
