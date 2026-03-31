@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Shopcart.css";
 import { fetchCart, removeFromCart, clearCart } from "./cartUtils";
 import Navbar from "../Navbar/Navbar";
@@ -8,17 +8,19 @@ export default function Shopcart() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    loadCart();
+    const load = async () => {
+      try {
+        const data = await fetchCart();
+        setCart(data.cart?.items || []);
+      } catch (err) {
+        console.log("Cart fetch error:", err);
+      }
+    };
+
+    load();
   }, []);
 
-  const loadCart = async () => {
-    try {
-      const data = await fetchCart();
-      setCart(data.cart?.items || []);
-    } catch (err) {
-      console.log("Cart fetch error:", err);
-    }
-  };
+
 
   const handleRemove = async (productId) => {
     try {

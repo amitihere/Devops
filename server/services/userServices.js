@@ -34,8 +34,7 @@ const loginUser = async (data) => {
     if(!comparePassword){
         throw new Error("The password is wrong please enter the correct password")
     }
-    const { password, ...frontData } = NotexistingUser;
-    return frontData;
+    return NotexistingUser;
 
   } catch (err) {
     console.error("Create user error:", err);

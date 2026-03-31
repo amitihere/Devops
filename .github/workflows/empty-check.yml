@@ -1,4 +1,4 @@
-name: Empty Variable Check
+name: Code Quality Checks
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  check-empty-vars:
+  checks:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,5 +22,14 @@ jobs:
         working-directory: ./client
         run: npm install
 
-      - name: Run empty variable check
-        run: node scripts/checkEmpty.js
+      - name: Run ESLint (client)
+        working-directory: ./client
+        run: npm run lint
+
+      - name: Install dependencies (server)
+        working-directory: ./server
+        run: npm install
+
+      - name: Run ESLint (server)
+        working-directory: ./server
+        run: npm run lint

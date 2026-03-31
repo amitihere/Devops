@@ -6,22 +6,21 @@ import './Navbar.css';
 export default function Navbar() {
 
     const [user, setUser] = useState(null);
-    const [count, setCount] = useState(0);
+    const [count] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
         const loader = async () => {
-            // try{
-            //     const stored = localStorage.getItem('thriftvault_user');
-            //     if (stored) {
-            //         const user = JSON.parse(stored);
-            //         console.log('Loaded user from localStorage:', user);
-            //         setUser(user);
-            // }
-            // } catch {
-            //     setUser(null);
-            // }
-            localStorage.clear();
+            try{
+                const stored = localStorage.getItem('thriftvault_user');
+                if (stored) {
+                    const user = JSON.parse(stored);
+                    console.log('Loaded user from localStorage:', user);
+                    setUser(user);
+            }
+            } catch {
+                setUser(null);
+            }
         };
 
         loader();

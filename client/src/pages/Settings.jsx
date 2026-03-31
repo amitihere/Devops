@@ -45,10 +45,18 @@ export default function Settings() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+    const loadUser = () => {
         const stored = localStorage.getItem('thriftvault_user');
         if (stored) {
-            try { setUser(JSON.parse(stored)); } catch { setUser(null); }
+        try {
+            setUser(JSON.parse(stored));
+        } catch {
+            setUser(null);
         }
+        }
+        setUser(null);
+    };
+    loadUser();
     }, []);
 
     const initials = user
