@@ -6,7 +6,6 @@ import { vibeFilters } from '../../utils/dummy';
 export default function StyleGuide() {
     return (
         <section className="genz-section">
-            {/* Header */}
             <div className="genz-header">
                 <div className="genz-header-left">
                     <div className="genz-eyebrow-row">
