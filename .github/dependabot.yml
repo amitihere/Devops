@@ -1,0 +1,14 @@
+# Dependabot configuration file , this is used to find the expired 
+# dependencies and update them by creating a PR so that i cn merge it after wards.
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/client"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "npm"
+    directory: "/server"
+    schedule:
+      interval: "weekly"
