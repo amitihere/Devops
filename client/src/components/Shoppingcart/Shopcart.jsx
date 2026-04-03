@@ -46,53 +46,53 @@ export default function Shopcart() {
 
   return (
     <>
-    <Navbar />
-    <div className="shopcart">
-      
-      <div className="shopcart-header">
-        <h2>Your Cart</h2>
-      </div>
+      <Navbar />
+      <div className="shopcart">
 
-      {message && <div className="shopcart-warning">{message}</div>}
+        <div className="shopcart-header">
+          <h2>Your Cart</h2>
+        </div>
 
-      <div className="shopcart-body">
-        {cart.length === 0 ? (
-          <>
-            <p>Your shopping cart is currently empty</p>
-            <p>
-              Maximum number of items which can be added are 5, so please keep
-              the useful
-            </p>
-          </>
-        ) : (
-          <>
-            {cart.map((item) => (
-              <div key={item._id} className="shopcart-item">
-                <img
-                  src={item.productId?.image}
-                  alt={item.productId?.name}
-                  className="shopcart-item-image"
-                />
-                <div className="shopcart-item-info">
-                  <h3 className="shopcart-item-name">{item.productId?.name}</h3>
-                  <p className="shopcart-item-price">₹{item.productId?.price}</p>
-                  <p className="shopcart-item-qty">Qty: {item.quantity}</p>
+        {message && <div className="shopcart-warning">{message}</div>}
+
+        <div className="shopcart-body">
+          {cart.length === 0 ? (
+            <>
+              <p>Your shopping cart is currently empty</p>
+              <p>
+                Maximum number of items which can be added are 5, so please keep
+                the useful
+              </p>
+            </>
+          ) : (
+            <>
+              {cart.map((item) => (
+                <div key={item._id} className="shopcart-item">
+                  <img
+                    src={item.productId?.image}
+                    alt={item.productId?.name}
+                    className="shopcart-item-image"
+                  />
+                  <div className="shopcart-item-info">
+                    <h3 className="shopcart-item-name">{item.productId?.name}</h3>
+                    <p className="shopcart-item-price">₹{item.productId?.price}</p>
+                    <p className="shopcart-item-qty">Qty: {item.quantity}</p>
+                  </div>
+                  <button
+                    className="shopcart-item-remove"
+                    onClick={() => handleRemove(item.productId?._id)}
+                  >
+                    Remove
+                  </button>
                 </div>
-                <button
-                  className="shopcart-item-remove"
-                  onClick={() => handleRemove(item.productId?._id)}
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-            <button className="shopcart-clear-btn" onClick={handleClear}>
-              Clear Cart
-            </button>
-          </>
-        )}
+              ))}
+              <button className="shopcart-clear-btn" onClick={handleClear}>
+                Clear Cart
+              </button>
+            </>
+          )}
+        </div>
       </div>
-    </div>
     </>
   );
 }

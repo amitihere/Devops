@@ -56,35 +56,8 @@ const loginController = async (req,res) => {
     try{
         const completeData = {email,password}
         const loginUserData = await loginUser(completeData)
-        const info = await transporter.sendMail({
-        from: `"Mr Thrift" <${process.env.SMTP_USER}>`,
-        to: email,
-        subject: "Welcome Back to Mr Thrift",
-        html: `
-            <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-            <h2 style="color: #1a73e8;">Welcome Back to Mr Thrift</h2>
-            
-            <p>Hi ${loginUserData.username || "Customer"},</p>
 
-            <p>We noticed a successful login to your Mr Thrift account.</p>
-
-            <p>If this was you — great! You're all set to explore and buy your next stunning outfit.</p>
-
-            <hr style="margin: 20px 0;" />
-
-            <p style="font-size: 14px; color: #777;">
-                If you did NOT log in, please reset your password immediately or contact support.
-            </p>
-
-            <p style="margin-top: 20px;">
-                Safe Travels,<br/>
-                <strong>Team Mr Thrift ✈️</strong>
-            </p>
-            </div>
-        `,
-        });
-
-        return res.status(200).json({message: "User logged in successfully", user: loginUserData,info:info})
+        return res.status(200).json({message: "User logged in successfully", user: loginUserData})
         
     }catch(err){
         res.status(500).json({message: "Error logging in user",error:err.message})
