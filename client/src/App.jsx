@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage'
 import Login from './pages/Login'
 import Shopcart from './components/Shoppingcart/Shopcart'
 import Settings from './pages/Settings'
+import CategoryPage from './pages/CategoryPage'
 
 function HomeLayout() {
   const [activeCategory, setActiveCategory] = useState(null)
@@ -35,6 +36,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/cart" element={<Shopcart />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/category/:category/:subcategory" element={<CategoryPage />} />
     </Routes>
   )
 }

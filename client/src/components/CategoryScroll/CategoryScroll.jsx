@@ -1,17 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 import './CategoryScroll.css';
 import { categoryData, categoryOrder } from '../../utils/category';
+import { toSlug } from '../../utils/dummyProducts';
 
 export default function CategoryScroll({ activeCategory, setActiveCategory }) {
     const navigate = useNavigate();
 
-    const handleClick = (label, path) => {
-        if (path) {
-            navigate(path);
-        } else {
-            setActiveCategory(label);
-        }
+    const handleCategoryClick = (label) => {
+        setActiveCategory(label);
     };
+
+    const handleSubcategoryClick = (parentLabel, itemLabel) => {
+        const slug = toSlug(itemLabel);
+        navigate(`/category/${toSlug(parentLabel)}/${slug}`);
+    };
+
+    const renderItems = (parentLabel, items) =>
+        items
+            .filter((item) => item && item.trim().length > 0 && item.length < 60)
+            .map((item) => (
+                <li key={item}>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleSubcategoryClick(parentLabel, item);
+                        }}
+                    >
+                        {item}
+                    </a>
+                </li>
+            ));
 
     return (
         <div className="category-bar">
@@ -22,7 +41,7 @@ export default function CategoryScroll({ activeCategory, setActiveCategory }) {
                         <div key={label} className="category-item">
                             <button
                                 className={`category-link ${activeCategory === label ? 'active' : ''}`}
-                                onClick={() => handleClick(label, data.path)}
+                                onClick={() => handleCategoryClick(label)}
                             >
                                 {label.toUpperCase()}
                             </button>
@@ -36,9 +55,7 @@ export default function CategoryScroll({ activeCategory, setActiveCategory }) {
                                                 <div key={sec.title} className="dropdown-section">
                                                     <h4 className="dropdown-heading">{sec.title}</h4>
                                                     <ul className="dropdown-list">
-                                                        {sec.items.map((item) => (
-                                                            <li key={item}><a href="#">{item}</a></li>
-                                                        ))}
+                                                        {renderItems(label, sec.items)}
                                                     </ul>
                                                 </div>
                                             ))}
@@ -50,9 +67,7 @@ export default function CategoryScroll({ activeCategory, setActiveCategory }) {
                                                 <div key={sec.title} className="dropdown-section">
                                                     <h4 className="dropdown-heading">{sec.title}</h4>
                                                     <ul className="dropdown-list">
-                                                        {sec.items.map((item) => (
-                                                            <li key={item}><a href="#">{item}</a></li>
-                                                        ))}
+                                                        {renderItems(label, sec.items)}
                                                     </ul>
                                                 </div>
                                             ))}
@@ -64,9 +79,7 @@ export default function CategoryScroll({ activeCategory, setActiveCategory }) {
                                                 <div key={sec.title} className="dropdown-section">
                                                     <h4 className="dropdown-heading">{sec.title}</h4>
                                                     <ul className="dropdown-list">
-                                                        {sec.items.map((item) => (
-                                                            <li key={item}><a href="#">{item}</a></li>
-                                                        ))}
+                                                        {renderItems(label, sec.items)}
                                                     </ul>
                                                 </div>
                                             ))}
