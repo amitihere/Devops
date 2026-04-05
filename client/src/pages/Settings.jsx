@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     FiUser, FiLock, FiMapPin, FiCreditCard,
-    FiShoppingBag, FiFileText, FiHeart,
-    FiBell, FiHelpCircle, FiInfo,
-    FiLogOut, FiTrash2, FiChevronRight, FiChevronLeft
+    FiShoppingBag, FiFileText, FiHeart, FiHelpCircle, FiInfo,
+    FiLogOut, FiChevronRight, FiChevronLeft
 } from 'react-icons/fi';
 import './Settings.css';
 
@@ -36,20 +35,28 @@ const sections = [
 ];
 
 const dangerItems = [
-    { id: 'logout', icon: FiLogOut, color: 'red', label: 'Log Out', desc: 'Sign out of your account' },
-    { id: 'delete', icon: FiTrash2, color: 'red', label: 'Delete Account', desc: 'Permanently remove your account & data', danger: true },
+    { id: 'logout', icon: FiLogOut, color: 'red', label: 'Log Out', desc: 'Sign out of your account' }
 ];
 
 export default function Settings() {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState("");
+
+    const handleLogout = () => {
+        localStorage.removeItem('thriftvault_user');
+        setUser(null);
+        navigate('/');
+    };
 
     useEffect(() => {
     const loadUser = () => {
         const stored = localStorage.getItem('thriftvault_user');
+        console.log('Loaded user from localStorage seetinggs:', stored);
         if (stored) {
         try {
-            setUser(JSON.parse(stored));
+            const parsed = JSON.parse(stored);
+            setUser(JSON.parse(parsed.username));
+            console.log('Parsed user:', parsed);
         } catch {
             setUser(null);
         }
@@ -77,7 +84,7 @@ export default function Settings() {
                 <div className="settings-header-title">
                     <div className="settings-avatar">{initials}</div>
                     <div className="settings-user-info">
-                        <h1>{displayName}</h1>
+                        <h1>{user}</h1>
                         {displayEmail && <span>{displayEmail}</span>}
                     </div>
                 </div>
@@ -116,6 +123,7 @@ export default function Settings() {
                                 id={`setting-${item.id}`}
                                 role="button"
                                 tabIndex={0}
+                                onClick={item.id === "logout" ? handleLogout : () => handleClick(item.id)}
                             >
                                 <div className={`settings-item-icon settings-icon--${item.color}`}>
                                     <item.icon size={19} />

@@ -36,10 +36,6 @@ export default function Auth() {
                 localStorage.setItem('thriftvault_user', JSON.stringify(data.user));
             }
 
-            if (data.token) {
-                localStorage.setItem('thriftvault_token', data.token);
-            }
-
             navigate('/');
         } catch (err) {
             setError(err.message);
