@@ -1,94 +1,122 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Shopcart.css";
 import { fetchCart, removeFromCart, clearCart } from "./cartUtils";
 import Navbar from "../Navbar/Navbar";
 
 export default function Shopcart() {
-  const [cart, setCart] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
+  // Load cart on mount
   useEffect(() => {
-    const load = async () => {
-      try {
-        const data = await fetchCart();
-        setCart(data.cart?.items || []);
-      } catch (err) {
-        console.log("Cart fetch error:", err);
-      }
+    const loadCart = async () => {
+      setLoading(true);
+      const cart = await fetchCart();
+      setCartItems(cart.items || []);
+      setLoading(false);
     };
-
-    load();
+    loadCart();
   }, []);
 
+  // Show a temporary message
+  const showMessage = (msg) => {
+    setMessage(msg);
+    setTimeout(() => setMessage(""), 2000);
+  };
 
-
+  // Remove one item from the cart
   const handleRemove = async (productId) => {
     try {
       await removeFromCart(productId);
-      setCart((prev) => prev.filter((item) => item.productId?._id !== productId));
-      setMessage("Item removed from cart");
-      setTimeout(() => setMessage(""), 2000);
+      setCartItems((prev) => prev.filter((item) => item.productId !== productId));
+      showMessage("Item removed from cart");
     } catch (err) {
-      setMessage(err.response?.data?.message || "Failed to remove item");
+      showMessage(err.response?.data?.message || "Failed to remove item");
     }
   };
 
+  // Clear the entire cart
   const handleClear = async () => {
     try {
       await clearCart();
-      setCart([]);
-      setMessage("Cart cleared");
-      setTimeout(() => setMessage(""), 2000);
+      setCartItems([]);
+      showMessage("Cart cleared");
     } catch (err) {
-      setMessage(err.response?.data?.message || "Failed to clear cart");
+      showMessage(err.response?.data?.message || "Failed to clear cart");
     }
   };
+
+  // Calculate total price
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <>
       <Navbar />
       <div className="shopcart">
-
         <div className="shopcart-header">
           <h2>Your Cart</h2>
+          {cartItems.length > 0 && (
+            <span className="shopcart-count">{cartItems.length} item{cartItems.length > 1 ? "s" : ""}</span>
+          )}
         </div>
 
         {message && <div className="shopcart-warning">{message}</div>}
 
         <div className="shopcart-body">
-          {cart.length === 0 ? (
-            <>
-              <p>Your shopping cart is currently empty</p>
-              <p>
-                Maximum number of items which can be added are 5, so please keep
-                the useful
+          {loading ? (
+            <p className="shopcart-loading">Loading your cart...</p>
+          ) : cartItems.length === 0 ? (
+            <div className="shopcart-empty">
+              <span className="shopcart-empty-icon">🛒</span>
+              <p>Your shopping cart is empty</p>
+              <p className="shopcart-empty-hint">
+                Browse categories and add items to your cart (max 5 items)
               </p>
-            </>
+              <button className="shopcart-browse-btn" onClick={() => navigate("/")}>
+                Start Shopping
+              </button>
+            </div>
           ) : (
             <>
-              {cart.map((item) => (
+              {cartItems.map((item) => (
                 <div key={item._id} className="shopcart-item">
                   <img
-                    src={item.productId?.image}
-                    alt={item.productId?.name}
+                    src={item.image || "https://via.placeholder.com/100?text=No+Image"}
+                    alt={item.name}
                     className="shopcart-item-image"
                   />
                   <div className="shopcart-item-info">
-                    <h3 className="shopcart-item-name">{item.productId?.name}</h3>
-                    <p className="shopcart-item-price">₹{item.productId?.price}</p>
+                    <h3 className="shopcart-item-name">{item.name}</h3>
+                    <p className="shopcart-item-price">₹{item.price?.toLocaleString("en-IN")}</p>
                     <p className="shopcart-item-qty">Qty: {item.quantity}</p>
                   </div>
                   <button
                     className="shopcart-item-remove"
-                    onClick={() => handleRemove(item.productId?._id)}
+                    onClick={() => handleRemove(item.productId)}
                   >
                     Remove
                   </button>
                 </div>
               ))}
-              <button className="shopcart-clear-btn" onClick={handleClear}>
-                Clear Cart
-              </button>
+
+              {/* Total and actions */}
+              <div className="shopcart-footer">
+                <div className="shopcart-total">
+                  <span>Total:</span>
+                  <span className="shopcart-total-price">₹{totalPrice.toLocaleString("en-IN")}</span>
+                </div>
+                <div className="shopcart-actions">
+                  <button className="shopcart-clear-btn" onClick={handleClear}>
+                    Clear Cart
+                  </button>
+                </div>
+              </div>
             </>
           )}
         </div>

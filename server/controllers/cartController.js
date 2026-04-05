@@ -1,10 +1,10 @@
 const { addToCart, getCart, removeFromCart, clearCart } = require("../services/cartServices");
 
 const addToCartController = async (req, res) => {
-  const { userId, productId, name, price, quantity } = req.body;
+  const { userId, productId, name, price, image, quantity } = req.body;
 
   try {
-    const updatedCart = await addToCart(userId,productId,name,price,quantity);
+    const updatedCart = await addToCart(userId, productId, name, price, image, quantity);
 
     return res.status(201).json({
       message: "Item added to cart",

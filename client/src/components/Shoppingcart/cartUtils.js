@@ -2,6 +2,7 @@ import axios from "axios";
 
 const BASE = "http://localhost:3000/api/user";
 
+// Get the logged-in user's ID from localStorage
 function getUserId() {
   const stored = localStorage.getItem("thriftvault_user");
   if (!stored) return null;
@@ -9,26 +10,38 @@ function getUserId() {
   return user._id;
 }
 
+// Fetch the user's cart (returns { items: [] } if no cart exists yet)
 export async function fetchCart() {
   const userId = getUserId();
-  const res = await axios.get(`${BASE}/shop/availableItems/cart`, {
-    params: { userId },
-  });
-  return res.data;
+  if (!userId) return { items: [] };
+
+  try {
+    const res = await axios.get(`${BASE}/shop/availableItems/cart`, {
+      params: { userId },
+    });
+    return res.data.cart || { items: [] };
+  } catch (err) {
+    // If cart doesn't exist yet, return empty cart instead of crashing
+    console.log("Cart fetch:", err.response?.data?.message || err.message);
+    return { items: [] };
+  }
 }
 
-export async function addToCart(product, quantity = 1) {
+// Add a product to the cart
+export async function addToCart(product) {
   const userId = getUserId();
   const res = await axios.post(`${BASE}/shop/items/cart`, {
     userId,
     productId: product._id || product.id,
     name: product.name,
     price: product.price,
-    quantity,
+    image: product.image,
+    quantity: 1,
   });
   return res.data;
 }
 
+// Remove a product from the cart by its productId string
 export async function removeFromCart(productId) {
   const userId = getUserId();
   const res = await axios.delete(`${BASE}/shop/items/cart`, {
@@ -37,6 +50,7 @@ export async function removeFromCart(productId) {
   return res.data;
 }
 
+// Clear the entire cart
 export async function clearCart() {
   const userId = getUserId();
   const res = await axios.delete(`${BASE}/shop/cart/clear`, {

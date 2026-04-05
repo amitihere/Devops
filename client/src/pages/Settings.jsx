@@ -70,7 +70,6 @@ export default function Settings() {
         ? (user.username || user.email || 'U').slice(0, 2).toUpperCase()
         : 'U';
 
-    const displayName = user?.username || user?.email || 'User';
     const displayEmail = user?.email || '';
 
     return (
@@ -123,7 +122,7 @@ export default function Settings() {
                                 id={`setting-${item.id}`}
                                 role="button"
                                 tabIndex={0}
-                                onClick={item.id === "logout" ? handleLogout : () => handleClick(item.id)}
+                                onClick={item.id === "logout" ? handleLogout : () => navigate(`/${item.id}`)}
                             >
                                 <div className={`settings-item-icon settings-icon--${item.color}`}>
                                     <item.icon size={19} />

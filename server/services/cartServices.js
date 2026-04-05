@@ -1,13 +1,13 @@
 const Cart = require("../schema/Cart");
 
-const addToCart = async (userId, productId, name, price, quantity) => {
+const addToCart = async (userId, productId, name, price, image, quantity) => {
   try {
     let cart = await Cart.findOne({ userId });
 
     if (!cart) {
       cart = await Cart.create({
         userId,
-        items: [{ productId, name, price, quantity }],
+        items: [{ productId, name, price, image, quantity }],
       });
       return cart;
     }
@@ -25,11 +25,12 @@ const addToCart = async (userId, productId, name, price, quantity) => {
     if (existingItem) {
       existingItem.quantity += quantity;
 
-      // (Optional) update latest price/name
+      // Update latest price/name/image
       existingItem.name = name;
       existingItem.price = price;
+      existingItem.image = image;
     } else {
-      cart.items.push({ productId, name, price, quantity });
+      cart.items.push({ productId, name, price, image, quantity });
     }
 
     await cart.save();
@@ -45,8 +46,9 @@ const getCart = async (userId) => {
   try {
     const cart = await Cart.findOne({ userId });
 
+    // If no cart exists yet, return an empty cart
     if (!cart) {
-      throw new Error("Cart not found for this user");
+      return { userId, items: [] };
     }
 
     return cart;
