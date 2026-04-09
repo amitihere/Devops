@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    FiUser, FiLock, FiMapPin, FiCreditCard,
-    FiShoppingBag, FiFileText, FiHeart, FiHelpCircle, FiInfo,
+    FiUser, FiMapPin,
+    FiShoppingBag, FiFileText,FiHelpCircle, FiInfo,
     FiLogOut, FiChevronRight, FiChevronLeft
 } from 'react-icons/fi';
 import './Settings.css';
@@ -12,9 +12,7 @@ const sections = [
         title: 'Account',
         items: [
             { id: 'profile', icon: FiUser, color: 'blue', label: 'Profile', desc: 'Name, email, phone & profile photo' },
-            { id: 'security', icon: FiLock, color: 'purple', label: 'Security', desc: 'Password, two-factor & login activity' },
             { id: 'address', icon: FiMapPin, color: 'green', label: 'Addresses', desc: 'Saved shipping & billing addresses' },
-            { id: 'payment', icon: FiCreditCard, color: 'orange', label: 'Payment Methods', desc: 'Cards, UPI & wallet preferences' },
         ],
     },
     {
@@ -22,7 +20,6 @@ const sections = [
         items: [
             { id: 'cart', icon: FiShoppingBag, color: 'pink', label: 'Cart', desc: 'View and manage items in your cart' },
             { id: 'orders', icon: FiFileText, color: 'teal', label: 'Orders', desc: 'Track, return & review past orders' },
-            { id: 'wishlist', icon: FiHeart, color: 'red', label: 'Wishlist', desc: 'Items you\'ve saved for later' },
         ],
     },
     {

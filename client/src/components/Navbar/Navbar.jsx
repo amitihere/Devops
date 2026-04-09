@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiTag, FiHeart, FiShoppingBag, FiUser, FiSettings, FiCheck } from 'react-icons/fi';
+import { FiTag,FiShoppingBag, FiUser, FiSettings, FiCheck } from 'react-icons/fi';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -48,10 +48,6 @@ export default function Navbar() {
 
 
                 <div className="navbar-actions">
-                    <button className="nav-btn" title="Wishlist">
-                        <FiHeart size={22} />
-                    </button>
-
                     <button className="nav-btn cart-btn" title="Cart" onClick={() => navigate('/cart')}>
                         <FiShoppingBag size={22} />
                         {count != 0 && <span className="cart-badge">{count}</span>}
