@@ -1,10 +1,36 @@
+import { useState } from 'react';
 import { FiHeart } from 'react-icons/fi';
 import './StyleGuide.css';
 import { genZPicks } from '../../utils/dummy';
 import { vibeFilters } from '../../utils/dummy';
+import ProductDetailModal from '../ProductDetail/ProductDetailModal';
+
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80';
 
 export default function StyleGuide() {
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const openModal = (item) => {
+        // Normalize genZPick shape to match ProductDetailModal expectations
+        setSelectedProduct({
+            id: String(item.id),
+            name: item.title,
+            price: item.price,
+            image: item.image,
+            sizes: item.sizes,
+            tag: item.label,
+            category: item.vibe,
+        });
+    };
+
     return (
+        <>
+        {selectedProduct && (
+            <ProductDetailModal
+                product={selectedProduct}
+                onClose={() => setSelectedProduct(null)}
+            />
+        )}
         <section className="genz-section">
             <div className="genz-header">
                 <div className="genz-header-left">
@@ -33,17 +59,27 @@ export default function StyleGuide() {
             {/* Product Grid */}
             <div className="genz-grid">
                 {genZPicks.map((item) => (
-                    <div key={item.id} className="genz-card">
+                    <div
+                        key={item.id}
+                        className="genz-card"
+                        onClick={() => openModal(item)}
+                        style={{ cursor: 'pointer' }}
+                    >
                         <div className="genz-image-wrap">
                             <img
                                 src={item.image}
                                 alt={item.title}
                                 className="genz-image"
                                 loading="lazy"
+                                onError={(e) => { e.currentTarget.src = FALLBACK_IMAGE; }}
                             />
                             <span className="genz-label-badge">{item.label}</span>
                             <div className="genz-overlay-actions">
-                                <button className="genz-wishlist" aria-label="Save">
+                                <button
+                                    className="genz-wishlist"
+                                    aria-label="Save"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
                                     <FiHeart size={16} />
                                 </button>
                             </div>
@@ -68,7 +104,12 @@ export default function StyleGuide() {
                                 <div className="genz-pricing">
                                     <span className="genz-price">₹{item.price.toLocaleString('en-IN')}</span>
                                 </div>
-                                <button className="genz-add-btn">View Details</button>
+                                <button
+                                    className="genz-add-btn"
+                                    onClick={(e) => { e.stopPropagation(); openModal(item); }}
+                                >
+                                    View Details
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -86,5 +127,7 @@ export default function StyleGuide() {
                 <button className="genz-banner-cta">Follow the Drop</button>
             </div>
         </section>
+        </>
     );
 }
+

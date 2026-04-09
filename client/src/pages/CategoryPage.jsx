@@ -1,16 +1,17 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { getProductsBySlug } from '../utils/dummyProducts';
-import { addToCart } from '../components/Shoppingcart/cartUtils';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
+import ProductDetailModal from '../components/ProductDetail/ProductDetailModal';
 import './CategoryPage.css';
+
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80';
 
 export default function CategoryPage() {
     const { subcategory } = useParams();
     const navigate = useNavigate();
-    const [toastMsg, setToastMsg] = useState('');
-    const [toastType, setToastType] = useState('success');
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const products = getProductsBySlug(subcategory);
 
@@ -20,41 +21,16 @@ export default function CategoryPage() {
         .replace(/\band\b/g, '&')
         .replace(/\b\w/g, (c) => c.toUpperCase());
 
-    const showToast = (msg, type = 'success') => {
-        setToastMsg(msg);
-        setToastType(type);
-        setTimeout(() => setToastMsg(''), 2500);
-    };
-
-    const handleAddToCart = async (product) => {
-        const user = localStorage.getItem('thriftvault_user');
-        if (!user) {
-            showToast('Please log in to add items to cart', 'warn');
-            setTimeout(() => navigate('/login'), 1400);
-            return;
-        }
-
-        try {
-            await addToCart({
-                _id: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-            });
-            showToast(`"${product.name}" added to cart! 🛒`);
-        } catch (err) {
-            const msg = err?.response?.data?.message || 'Failed to add to cart';
-            showToast(msg, 'error');
-        }
-    };
-
     return (
         <>
             <Navbar />
 
-            {/* Toast */}
-            {toastMsg && (
-                <div className={`cat-toast cat-toast--${toastType}`}>{toastMsg}</div>
+            {/* Product Detail Modal */}
+            {selectedProduct && (
+                <ProductDetailModal
+                    product={selectedProduct}
+                    onClose={() => setSelectedProduct(null)}
+                />
             )}
 
             <div className="cat-page">
@@ -83,13 +59,19 @@ export default function CategoryPage() {
                 ) : (
                     <div className="cat-grid">
                         {products.map((product) => (
-                            <div key={product.id} className="cat-card">
+                            <div
+                                key={product.id}
+                                className="cat-card"
+                                onClick={() => setSelectedProduct(product)}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 <div className="cat-card-img-wrap">
                                     <img
                                         src={product.image}
                                         alt={product.name}
                                         className="cat-card-img"
                                         loading="lazy"
+                                        onError={(e) => { e.currentTarget.src = FALLBACK_IMAGE; }}
                                     />
                                     {product.tag && (
                                         <span className="cat-card-tag">{product.tag}</span>
@@ -108,9 +90,9 @@ export default function CategoryPage() {
                                         <span className="cat-card-price">₹{product.price.toLocaleString('en-IN')}</span>
                                         <button
                                             className="cat-card-btn"
-                                            onClick={() => handleAddToCart(product)}
+                                            onClick={(e) => { e.stopPropagation(); setSelectedProduct(product); }}
                                         >
-                                            Add to Cart
+                                            View Details
                                         </button>
                                     </div>
                                 </div>
