@@ -1,0 +1,10 @@
+services:
+  client:
+    image: amitihere/thrift-frontend:v1
+    ports:
+      - "5173:5173"
+
+  server:
+    image: amitihere/thrift-backend:v1
+    ports:
+      - "4001:5173"
