@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FiShoppingCart, FiChevronRight } from "react-icons/fi";
 import "./Shopcart.css";
 import { fetchCart, removeFromCart, clearCart } from "./cartUtils";
 import Navbar from "../Navbar/Navbar";
@@ -55,6 +56,16 @@ export default function Shopcart() {
     0
   );
 
+  // Navigate to checkout with specific item(s)
+  const handleBuyNow = (item) => {
+    navigate("/checkout", { state: { cartItems: [item] } });
+  };
+
+  // Navigate to checkout with all cart items
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { cartItems } });
+  };
+
   return (
     <>
       <Navbar />
@@ -73,7 +84,9 @@ export default function Shopcart() {
             <p className="shopcart-loading">Loading your cart...</p>
           ) : cartItems.length === 0 ? (
             <div className="shopcart-empty">
-              <span className="shopcart-empty-icon">🛒</span>
+              <div className="shopcart-empty-icon">
+                <FiShoppingCart size={48} color="#d1d5db" />
+              </div>
               <p>Your shopping cart is empty</p>
               <p className="shopcart-empty-hint">
                 Browse categories and add items to your cart (max 5 items)
@@ -87,7 +100,7 @@ export default function Shopcart() {
               {cartItems.map((item) => (
                 <div key={item._id} className="shopcart-item">
                   <img
-                    src={item.image || "https://via.placeholder.com/100?text=No+Image"}
+                    src={item.image || "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=100&q=80"}
                     alt={item.name}
                     className="shopcart-item-image"
                   />
@@ -95,13 +108,24 @@ export default function Shopcart() {
                     <h3 className="shopcart-item-name">{item.name}</h3>
                     <p className="shopcart-item-price">₹{item.price?.toLocaleString("en-IN")}</p>
                     <p className="shopcart-item-qty">Qty: {item.quantity}</p>
+                    <p className="shopcart-item-subtotal">
+                      Subtotal: ₹{(item.price * item.quantity).toLocaleString("en-IN")}
+                    </p>
                   </div>
-                  <button
-                    className="shopcart-item-remove"
-                    onClick={() => handleRemove(item.productId)}
-                  >
-                    Remove
-                  </button>
+                  <div className="shopcart-item-actions">
+                    <button
+                      className="shopcart-item-buy"
+                      onClick={() => handleBuyNow(item)}
+                    >
+                      Buy Now
+                    </button>
+                    <button
+                      className="shopcart-item-remove"
+                      onClick={() => handleRemove(item.productId)}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               ))}
 
@@ -114,6 +138,9 @@ export default function Shopcart() {
                 <div className="shopcart-actions">
                   <button className="shopcart-clear-btn" onClick={handleClear}>
                     Clear Cart
+                  </button>
+                  <button className="shopcart-checkout-btn" onClick={handleCheckout}>
+                    Proceed to Checkout <FiChevronRight size={16} />
                   </button>
                 </div>
               </div>

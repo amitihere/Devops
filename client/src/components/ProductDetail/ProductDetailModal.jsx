@@ -69,8 +69,9 @@ export default function ProductDetailModal({ product, onClose }) {
         }
         setAddingToCart(true);
         try {
+            // Always coerce id to string so the backend middleware passes
             await addToCart({
-                _id: product.id || product._id,
+                _id: String(product.id ?? product._id ?? ''),
                 name: product.name || product.title,
                 price: product.price,
                 image: imgSrc,
@@ -97,10 +98,10 @@ export default function ProductDetailModal({ product, onClose }) {
             return;
         }
         setPaying(true);
-        // Add to cart then go to cart
         try {
+            // Always coerce id to string so the backend middleware passes
             await addToCart({
-                _id: product.id || product._id,
+                _id: String(product.id ?? product._id ?? ''),
                 name: product.name || product.title,
                 price: product.price,
                 image: imgSrc,

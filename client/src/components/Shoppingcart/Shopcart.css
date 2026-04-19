@@ -105,6 +105,21 @@
     transform: translateY(-2px);
 }
 
+/* ========== ITEM SUBTOTAL ========== */
+.shopcart-item-subtotal {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* ========== ITEM ACTIONS ========== */
+.shopcart-item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
 /* ========== ITEM IMAGE ========== */
 .shopcart-item-image {
     width: 100px;
@@ -139,6 +154,27 @@
 .shopcart-item-qty {
     font-size: 13px;
     color: var(--text-muted);
+}
+
+/* ========== BUY NOW BUTTON ========== */
+.shopcart-item-buy {
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    border: 1.5px solid #1a1a1a;
+    border-radius: var(--radius-sm);
+    background: #1a1a1a;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+.shopcart-item-buy:hover {
+    background: #333;
+    border-color: #333;
+    transform: translateY(-1px);
 }
 
 /* ========== REMOVE BUTTON ========== */
@@ -187,22 +223,44 @@
 .shopcart-actions {
     display: flex;
     gap: 12px;
+    align-items: center;
 }
 
 .shopcart-clear-btn {
     padding: 10px 24px;
     font-size: 14px;
     font-weight: 600;
-    color: var(--white);
-    background: #e53935;
-    border: none;
+    color: #e53935;
+    background: transparent;
+    border: 1.5px solid #e53935;
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: var(--transition);
 }
 
 .shopcart-clear-btn:hover {
-    background: #c62828;
+    background: #e53935;
+    color: var(--white);
+}
+
+/* ========== CHECKOUT BUTTON ========== */
+.shopcart-checkout-btn {
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    background: #1a1a1a;
+    border: 1.5px solid #1a1a1a;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.3px;
+}
+
+.shopcart-checkout-btn:hover {
+    background: #333;
+    border-color: #333;
+    transform: translateY(-1px);
 }
 
 /* ========== WARNING / MESSAGE ========== */
