@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     FiUser, FiMapPin,
-    FiShoppingBag, FiFileText,FiHelpCircle, FiInfo,
+    FiShoppingBag, FiFileText, FiHelpCircle, FiInfo,
     FiLogOut, FiChevronRight, FiChevronLeft
 } from 'react-icons/fi';
 import './Settings.css';
@@ -35,9 +35,19 @@ const dangerItems = [
     { id: 'logout', icon: FiLogOut, color: 'red', label: 'Log Out', desc: 'Sign out of your account' }
 ];
 
+// Map item id → frontend route
+const ROUTE_MAP = {
+    profile: '/profile',
+    address: '/address',
+    cart: '/cart',
+    orders: '/orders',
+    help: '/help',
+    about: '/about',
+};
+
 export default function Settings() {
     const navigate = useNavigate();
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState(null);
 
     const handleLogout = () => {
         localStorage.removeItem('thriftvault_user');
@@ -46,27 +56,22 @@ export default function Settings() {
     };
 
     useEffect(() => {
-    const loadUser = () => {
         const stored = localStorage.getItem('thriftvault_user');
-        console.log('Loaded user from localStorage seetinggs:', stored);
         if (stored) {
-        try {
-            const parsed = JSON.parse(stored);
-            setUser(JSON.parse(parsed.username));
-            console.log('Parsed user:', parsed);
-        } catch {
-            setUser(null);
+            try {
+                const parsed = JSON.parse(stored);
+                setUser(parsed);
+            } catch {
+                setUser(null);
+            }
         }
-        }
-        setUser(null);
-    };
-    loadUser();
     }, []);
 
     const initials = user
         ? (user.username || user.email || 'U').slice(0, 2).toUpperCase()
         : 'U';
 
+    const displayName = user?.username || user?.email || 'Guest';
     const displayEmail = user?.email || '';
 
     return (
@@ -80,7 +85,7 @@ export default function Settings() {
                 <div className="settings-header-title">
                     <div className="settings-avatar">{initials}</div>
                     <div className="settings-user-info">
-                        <h1>{user}</h1>
+                        <h1>{displayName}</h1>
                         {displayEmail && <span>{displayEmail}</span>}
                     </div>
                 </div>
@@ -93,7 +98,15 @@ export default function Settings() {
                         <h2 className="settings-section-title">{section.title}</h2>
                         <div className="settings-list">
                             {section.items.map(item => (
-                                <div className="settings-item" key={item.id} id={`setting-${item.id}`} role="button" tabIndex={0} onClick={() => {navigate(`/${item.id}`)}}>
+                                <div
+                                    className="settings-item"
+                                    key={item.id}
+                                    id={`setting-${item.id}`}
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => navigate(ROUTE_MAP[item.id] || `/${item.id}`)}
+                                    onKeyDown={(e) => e.key === 'Enter' && navigate(ROUTE_MAP[item.id] || `/${item.id}`)}
+                                >
                                     <div className={`settings-item-icon settings-icon--${item.color}`}>
                                         <item.icon size={20} />
                                     </div>
@@ -114,12 +127,13 @@ export default function Settings() {
                     <div className="settings-list">
                         {dangerItems.map(item => (
                             <div
-                                className={`settings-item ${item.danger ? 'settings-item--danger' : ''}`}
+                                className={`settings-item settings-item--danger`}
                                 key={item.id}
                                 id={`setting-${item.id}`}
                                 role="button"
                                 tabIndex={0}
-                                onClick={item.id === "logout" ? handleLogout : () => navigate(`/${item.id}`)}
+                                onClick={item.id === 'logout' ? handleLogout : () => navigate(`/${item.id}`)}
+                                onKeyDown={(e) => e.key === 'Enter' && (item.id === 'logout' ? handleLogout() : navigate(`/${item.id}`))}
                             >
                                 <div className={`settings-item-icon settings-icon--${item.color}`}>
                                     <item.icon size={19} />
