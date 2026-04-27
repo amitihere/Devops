@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { FiTag, FiArrowLeft, FiMail, FiLock, FiUser, FiPhone } from 'react-icons/fi';
 import './Auth.css';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+// Use relative paths so the Vite proxy (/api → backend container) handles routing.
+// This works both locally and inside Docker without any env-var baking issue.
+const API_BASE = '';
 
 export default function Auth() {
     const navigate = useNavigate();

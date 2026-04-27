@@ -4,7 +4,7 @@ import { FiChevronLeft, FiUser, FiSave, FiCamera } from 'react-icons/fi';
 import axios from 'axios';
 import './SettingsPage.css';
 
-const BASE = 'http://localhost:3000/api/user';
+const BASE = '/api/user';
 
 export default function ProfilePage() {
     const navigate = useNavigate();

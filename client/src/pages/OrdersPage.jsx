@@ -4,7 +4,7 @@ import { FiChevronLeft, FiPackage, FiChevronRight } from 'react-icons/fi';
 import axios from 'axios';
 import './SettingsPage.css';
 
-const BASE = 'http://localhost:3000/api/user';
+const BASE = '/api/user';
 
 const STATUS_COLORS = {
     pending: { bg: '#fef3c7', color: '#d97706', label: 'Pending' },

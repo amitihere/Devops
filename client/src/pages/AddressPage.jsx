@@ -4,7 +4,7 @@ import { FiChevronLeft, FiMapPin, FiSave, FiPlus } from 'react-icons/fi';
 import axios from 'axios';
 import './SettingsPage.css';
 
-const BASE = 'http://localhost:3000/api/user';
+const BASE = '/api/user';
 
 export default function AddressPage() {
     const navigate = useNavigate();

@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import "./Checkout.css";
 
-const BASE = "http://localhost:3000/api/user";
+const BASE = "/api/user";
 
 function getUserId() {
   const stored = localStorage.getItem("thriftvault_user");

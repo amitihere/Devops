@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE = "http://localhost:3000/api/user";
+const BASE = "/api/user";
 
 // Get the logged-in user's ID from localStorage
 function getUserId() {
