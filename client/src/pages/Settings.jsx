@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     FiUser, FiMapPin,
@@ -47,26 +47,22 @@ const ROUTE_MAP = {
 
 export default function Settings() {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const stored = localStorage.getItem('thriftvault_user');
+        if (!stored) return null;
+
+        try {
+            return JSON.parse(stored);
+        } catch {
+            return null;
+        }
+    });
 
     const handleLogout = () => {
         localStorage.removeItem('thriftvault_user');
         setUser(null);
         navigate('/');
     };
-
-    useEffect(() => {
-        const stored = localStorage.getItem('thriftvault_user');
-        if (stored) {
-            try {
-                const parsed = JSON.parse(stored);
-                setUser(parsed);
-            } catch {
-                setUser(null);
-            }
-        }
-    }, []);
-
     const initials = user
         ? (user.username || user.email || 'U').slice(0, 2).toUpperCase()
         : 'U';
